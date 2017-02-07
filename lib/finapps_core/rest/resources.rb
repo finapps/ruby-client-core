@@ -11,8 +11,6 @@ module FinAppsCore
       # @return [FinAppsCore::REST::Resources]
       def initialize(client)
         raise MissingArgumentsError.new 'Missing argument: client.' if client.nil?
-        raise InvalidArgumentsError.new 'Invalid argument: client.' unless client.is_a?(FinAppsCore::REST::Client)
-
         @client = client
       end
 
