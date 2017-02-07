@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'FinApps REST API ruby client - Core.'
   spec.description = 'A simple library for communicating with the FinApps REST API. Core functionality.'
   spec.homepage = 'https://github.com/finapps/ruby-client-core'
-  spec.license = 'MIT'
+  spec.licenses = ['MIT']
 
   spec.files = `git ls-files -z`.split("\x0")
   spec.executables = spec.files.grep(%r{^bin/}) {|f| File.basename(f) }
@@ -34,6 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.6.0'
   spec.add_development_dependency 'rubocop', '0.45.0'
 
-  spec.extra_rdoc_files = %w(README.md LICENSE.txt)
+  spec.extra_rdoc_files = %w(README.md LICENSE)
   spec.rdoc_options = %w(--line-numbers --inline-source --title finapps-ruby-core --main README.md)
 end
