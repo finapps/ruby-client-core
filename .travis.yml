@@ -11,4 +11,4 @@ notifications:
   slack: financialapps:fA8XwEcap3hHZk0iNmPPJvT1
 addons:
   code_climate:
-    repo_token: dc180b31d340bd88cedd0ec3ea8ba8ec5093f2bafe77a7bf5bbdcb1c5ff9dc7f
+    repo_token: 5a8d194cbc23aa4c171e3478e3b6bbea9dd96041071380ec25bf80c07770b39a
