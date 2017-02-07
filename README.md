@@ -1,6 +1,6 @@
 
-FinApps Ruby-Client
-===================
+FinApps Ruby-Client-Core
+========================
 
 [![Build Status](https://travis-ci.org/finapps/ruby-client-core.svg?branch=master)](https://travis-ci.org/finapps/ruby-client-core)
 [![Code Climate](https://codeclimate.com/github/finapps/ruby-client-core/badges/gpa.svg)](https://codeclimate.com/github/finapps/ruby-client-core)
