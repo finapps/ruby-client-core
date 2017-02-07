@@ -29,5 +29,16 @@ RSpec.describe ObjectExtensions do
         it { expect(false.present?).to eq(false) }
       end
     end
+
+    describe '#presence' do
+      # Returns the receiver if it's present otherwise returns +nil+.
+      context 'returns the receiver when the receiver is present' do
+        it { expect(true.presence).to eq(true) }
+      end
+
+      context 'returns nil when the receiver is not present' do
+        it { expect(false.presence).to be_nil }
+      end
+    end
   end
 end
