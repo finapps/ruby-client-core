@@ -6,7 +6,7 @@ RSpec.describe FinAppsCore::Middleware::RaiseError do
   describe '#on_complete' do
     subject { FinAppsCore::Middleware::RaiseError.new(fake_app) }
 
-    context 'for succesful requests' do
+    context 'for successful requests' do
       let(:env) { Env.new(200) }
       it { expect { subject.on_complete(env) }.not_to raise_error }
     end
