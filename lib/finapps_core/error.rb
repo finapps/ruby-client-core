@@ -12,6 +12,6 @@ module FinAppsCore # :nodoc:
   class ApiSessionTimeoutError < Error; end
 
   %i(InvalidArgumentsError MissingArgumentsError ApiSessionTimeoutError).each do |const|
-    Error.const_set(const, FinApps.const_get(const))
+    Error.const_set(const, FinAppsCore.const_get(const))
   end
 end

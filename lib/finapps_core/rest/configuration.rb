@@ -4,7 +4,6 @@ module FinAppsCore
     # Represents the client configuration options
     class Configuration # :nodoc:
       using ObjectExtensions
-      using HashExtensions
 
       attr_accessor :host,
                     :tenant_identifier, :tenant_token,
@@ -12,7 +11,9 @@ module FinAppsCore
                     :proxy, :timeout, :retry_limit, :log_level
 
       def initialize(options={})
-        FinAppsCore::REST::Defaults::DEFAULTS.merge(options.compact).each {|key, value| public_send("#{key}=", value) }
+        non_nil_options = options.select {|_, value| !value.nil? }
+        FinAppsCore::REST::Defaults::DEFAULTS.merge(non_nil_options)
+                                             .each {|key, value| public_send("#{key}=", value) }
         raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {host: #{host}}" unless valid_host?
         raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {timeout: #{timeout}}" unless timeout.integer?
       end
