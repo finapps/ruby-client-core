@@ -1,0 +1,14 @@
+language: ruby
+cache: bundler
+rvm:
+  - 2.3.1
+before_install:
+- "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+script:
+  - bundle exec rspec
+notifications:
+  email: false
+  slack: financialapps:fA8XwEcap3hHZk0iNmPPJvT1
+addons:
+  code_climate:
+    repo_token: dc180b31d340bd88cedd0ec3ea8ba8ec5093f2bafe77a7bf5bbdcb1c5ff9dc7f
