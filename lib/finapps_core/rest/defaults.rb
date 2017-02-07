@@ -14,7 +14,6 @@ module FinAppsCore
         retry_limit:      1,
         log_level:        Logger::INFO
       }.freeze
-
     end
   end
 end

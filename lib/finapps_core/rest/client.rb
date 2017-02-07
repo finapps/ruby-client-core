@@ -23,7 +23,6 @@ module FinAppsCore
       def version
         @version ||= FinAppsCore::REST::Version.new self
       end
-
     end
   end
 end
