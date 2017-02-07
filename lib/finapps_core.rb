@@ -24,8 +24,6 @@ require 'finapps_core/middleware/middleware'
 require 'finapps_core/rest/defaults'
 require 'finapps_core/rest/resources'
 
-require 'finapps_core/rest/version'
-
 require 'finapps_core/rest/configuration'
 require 'finapps_core/rest/credentials'
 require 'finapps_core/rest/connection'
