@@ -3,6 +3,9 @@ require 'sinatra/base'
 
 # the FakeApi class is used to mock API requests while testing.
 class FakeApi < Sinatra::Base
+  # timeout
+  get('/v2/resources/timeout') { status 419 }
+
   # resource
   post('/v2/resources') { json_response 201, 'resource.json' }
   get('/v2/resources/:id') { json_response 200, 'resource.json' }
@@ -18,8 +21,8 @@ class FakeApi < Sinatra::Base
   get('/v2/server_error') { status 500 }
   get('/v2/proxy_error') { status 407 }
 
-  # timeout
-  get('/v2/orders/timeout') { status 419 }
+  # relevance
+  get('/v2/relevance/ruleset/names') { json_response 200, 'relevance_ruleset_names.json' }
 
   private
 
