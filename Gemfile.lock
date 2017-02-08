@@ -85,11 +85,11 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.14, >= 1.14.3)
-  codeclimate-test-reporter (~> 1.0.5)
+  codeclimate-test-reporter (~> 1.0, >= 1.0.5)
   finapps_core!
   rake (~> 12.0.0, >= 12.0.0)
   rspec (~> 3.5, >= 3.5.0)
-  rubocop (= 0.47.1)
+  rubocop (~> 0.47, >= 0.47.1)
   simplecov (~> 0.11, >= 0.11.2)
   sinatra (~> 1.4, >= 1.4.7)
   webmock (~> 2.3, >= 2.3.2)
