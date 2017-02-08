@@ -17,8 +17,8 @@ RSpec.describe FinAppsCore::Middleware::RaiseError do
     end
     context 'for connection failed error' do
       let(:env) { Env.new(407) }
-      error_message = '407 "Proxy Authentication Required"'
-      it { expect { subject.on_complete(env) }.to raise_error(Faraday::Error::ConnectionFailed, error_message) }
+      error_message = 'Connection Failed'
+      it { expect { subject.on_complete(env) }.to raise_error(FinAppsCore::ConnectionFailedError, error_message) }
     end
   end
 end
