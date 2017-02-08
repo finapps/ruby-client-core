@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    finapps_core (2.0.4)
+    finapps_core (2.0.5)
       faraday (~> 0.11, >= 0.11.0)
-      faraday_middleware (~> 0.11, >= 0.11.0)
+      faraday_middleware (~> 0.11, >= 0.11.0.1)
       rash (~> 0.4, >= 0.4.0)
       typhoeus (~> 1.1, >= 1.1.2)
 
@@ -87,7 +87,7 @@ DEPENDENCIES
   bundler (~> 1.14, >= 1.14.3)
   codeclimate-test-reporter (~> 1.0, >= 1.0.5)
   finapps_core!
-  rake (~> 12.0.0, >= 12.0.0)
+  rake (~> 12.0, >= 12.0.0)
   rspec (~> 3.5, >= 3.5.0)
   rubocop (~> 0.47, >= 0.47.1)
   simplecov (~> 0.11, >= 0.11.2)
