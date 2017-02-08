@@ -73,9 +73,6 @@ module FinAppsCore
 
         begin
           response = execute_method path, method, params
-
-        rescue FinAppsCore::ApiSessionTimeoutError => error
-          handle_error(error)
         rescue FinAppsCore::InvalidArgumentsError => error
           handle_error error
         rescue FinAppsCore::MissingArgumentsError => error
@@ -110,7 +107,7 @@ module FinAppsCore
         when :delete
           delete(path, params)
         else
-          raise FinAppsCore::InvalidArgumentsError.new "Method not supported: #{method}."
+          raise FinAppsCore::UnsupportedHttpMethodError.new "Method not supported: #{method}."
         end
       end
     end
