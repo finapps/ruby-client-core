@@ -30,7 +30,7 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
   describe '#send_request' do
     it 'should raise FinAppsCore::InvalidArgumentsError if method is NOT supported' do
-      expect { subject.send_request('fake_path', :option) }.to raise_error(FinAppsCore::InvalidArgumentsError,
+      expect { subject.send_request('fake_path', :option) }.to raise_error(FinAppsCore::UnsupportedHttpMethodError,
                                                                            'Method not supported: option.')
     end
 
@@ -53,15 +53,6 @@ RSpec.describe FinAppsCore::REST::BaseClient do
         expect(subject.size).to eq(return_array.length)
       end
 
-      context 'for unsupported methods' do
-        subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('users', :options) }
-
-        it do
-          expect { subject.send_request(nil, :get) }
-            .to raise_error(FinAppsCore::InvalidArgumentsError, 'Method not supported: options.')
-        end
-      end
-
       context 'for client errors' do
         subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('client_error', :get) }
 
@@ -81,15 +72,13 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
       context 'for proxy errors' do
         subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('proxy_error', :get) }
-
-        it { expect { subject }.to raise_error(Faraday::ConnectionFailed, '407 "Proxy Authentication Required"') }
+        it { expect { subject }.to raise_error(FinAppsCore::ConnectionFailedError, 'Connection Failed') }
       end
     end
 
     context 'if a block is provided' do
-      it('gets executed on the response') do
-        expect(subject.send_request('relevance/ruleset/names', :get, &:status)[RESPONSE]).to eq(200)
-        expect(subject.send_request('relevance/ruleset/names', :get) {|r| r.body.length }[RESPONSE]).to eq(45)
+      it('gets executed on the response and returned as the result') do
+        expect(subject.send_request('relevance/ruleset/names', :get) {|r| r.body.length }).to eq([45, []])
       end
     end
   end

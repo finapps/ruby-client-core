@@ -15,7 +15,7 @@ module FinAppsCore
         if env[:status] == API_SESSION_TIMEOUT
           raise(FinAppsCore::Error::ApiSessionTimeoutError, 'Api Session Timed out')
         elsif env[:status] == CONNECTION_FAILED_STATUS
-          raise(Faraday::Error::ConnectionFailed, '407 "Proxy Authentication Required"')
+          raise(FinAppsCore::Error::ConnectionFailedError, 'Connection Failed')
         else
           raise(Faraday::Error::ClientError, response_values(env))
         end
