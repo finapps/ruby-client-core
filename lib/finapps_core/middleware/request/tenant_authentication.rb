@@ -6,9 +6,9 @@ module FinAppsCore
     class TenantAuthentication < Faraday::Middleware
       KEY = 'X-FinApps-Token' unless defined? KEY
 
-      def initialize(app, identifier, token)
+      def initialize(app, token)
         super(app)
-        @header_value = "#{identifier.to_s.strip}=#{token.to_s.strip}"
+        @header_value = token.to_s.strip
       end
 
       def call(env)

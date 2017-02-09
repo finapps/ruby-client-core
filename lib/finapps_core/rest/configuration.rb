@@ -5,15 +5,14 @@ module FinAppsCore
     class Configuration # :nodoc:
       using ObjectExtensions
 
-      attr_accessor :host,
-                    :tenant_identifier, :tenant_token,
-                    :user_identifier, :user_token,
-                    :proxy, :timeout, :retry_limit, :log_level
+      attr_accessor :tenant_token, :user_identifier, :user_token,
+                    :host, :proxy, :timeout, :retry_limit,
+                    :log_level
 
       def initialize(options={})
-        non_nil_options = options.select {|_, value| !value.nil? }
-        FinAppsCore::REST::Defaults::DEFAULTS.merge(non_nil_options)
+        FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))
                                              .each {|key, value| public_send("#{key}=", value) }
+
         raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {host: #{host}}" unless valid_host?
         raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {timeout: #{timeout}}" unless timeout.integer?
       end
@@ -26,6 +25,10 @@ module FinAppsCore
 
       def valid_host?
         host.start_with?('http://', 'https://')
+      end
+
+      def remove_empty_options(hash)
+        hash.select {|_, value| !value.nil? }
       end
     end
   end

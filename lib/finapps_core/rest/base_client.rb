@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+require_relative './configuration.rb'
+require_relative './connection.rb'
+require_relative '../utils/loggeable'
+
 module FinAppsCore
   module REST
     # base client functionality
@@ -11,7 +15,7 @@ module FinAppsCore
       attr_reader :config
 
       def initialize(options, logger=nil)
-        @config = FinAppsCore::REST::Configuration.new options
+        @config = ::FinAppsCore::REST::Configuration.new options
         @logger = logger
       end
 
