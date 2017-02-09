@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 RSpec.describe FinAppsCore::REST::BaseClient do
-  let(:valid_tenant_options) do
-    {tenant_identifier: VALID_CREDENTIALS[:identifier],
-     tenant_token: VALID_CREDENTIALS[:token]}
-  end
+  let(:valid_tenant_options) { {tenant_token: VALID_CREDENTIALS[:token]} }
   subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options) }
 
   RESPONSE = 0

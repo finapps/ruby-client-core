@@ -5,10 +5,9 @@ module FinAppsCore
     class Configuration # :nodoc:
       using ObjectExtensions
 
-      attr_accessor :host,
-                    :tenant_identifier, :tenant_token,
-                    :user_identifier, :user_token,
-                    :proxy, :timeout, :retry_limit, :log_level
+      attr_accessor :tenant_token, :user_identifier, :user_token,
+                    :host, :proxy, :timeout, :retry_limit,
+                    :log_level
 
       def initialize(options={})
         FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))

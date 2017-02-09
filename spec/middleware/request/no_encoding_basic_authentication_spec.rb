@@ -1,31 +1,27 @@
 # frozen_string_literal: true
 RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
-  let(:valid_credentials) { VALID_CREDENTIALS }
   let(:key) { FinAppsCore::Middleware::NoEncodingBasicAuthentication::KEY }
 
   describe '#call' do
-    fake_app = proc {|env| env }
+    app = proc {|env| env }
 
     context 'when credentials were provided' do
-      let(:middleware) do
-        FinAppsCore::Middleware::NoEncodingBasicAuthentication.new(fake_app, VALID_CREDENTIALS[:token])
-      end
-      let(:expected_header) { "Basic #{valid_credentials[:token]}" }
+      let(:middleware) { FinAppsCore::Middleware::NoEncodingBasicAuthentication.new(app, VALID_CREDENTIALS[:token]) }
+      let(:expected_header_value) { "Basic #{VALID_CREDENTIALS[:token]}" }
 
       context 'when header was not previously set' do
         let(:request_env) { {request_headers: {}} }
-        subject(:actual_header) { middleware.call(request_env)[:request_headers][key] }
+        subject(:result) { middleware.call(request_env) }
 
-        it('generates a header') { expect(actual_header).to eq(expected_header) }
+        it('generates a header') { expect(result[:request_headers][key]).to eq(expected_header_value) }
       end
 
       context 'when header was previously set' do
-        let(:existing_header) { {FinAppsCore::Middleware::NoEncodingBasicAuthentication::KEY => 'foo'} }
-        let(:request_env) { {request_headers: existing_header} }
-        subject(:actual_header) { middleware.call(request_env)[:request_headers][key] }
+        let(:request_env) { {request_headers: {key => 'foo'}} }
+        subject(:result) { middleware.call(request_env) }
 
-        it('does not override existing header') { expect(actual_header).to eq('foo') }
-        it('does not generate a header') { expect(actual_header).to_not eq(expected_header) }
+        it('does not override existing header') { expect(result[:request_headers][key]).to eq('foo') }
+        it('does not generate a header') { expect(result[:request_headers][key]).to_not eq(expected_header_value) }
       end
     end
   end
