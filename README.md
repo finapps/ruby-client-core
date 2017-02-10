@@ -2,6 +2,7 @@
 FinApps Ruby-Client-Core
 ========================
 
+[![Gem Version](https://badge.fury.io/rb/finapps_core.svg)](https://badge.fury.io/rb/finapps_core)
 [![Build Status](https://travis-ci.org/finapps/ruby-client-core.svg?branch=master)](https://travis-ci.org/finapps/ruby-client-core)
 [![Code Climate](https://codeclimate.com/github/finapps/ruby-client-core/badges/gpa.svg)](https://codeclimate.com/github/finapps/ruby-client-core)
 [![Test Coverage](https://codeclimate.com/github/finapps/ruby-client-core/badges/coverage.svg)](https://codeclimate.com/github/finapps/ruby-client-core/coverage)
