@@ -2,6 +2,7 @@
 module FinAppsCore
   module REST
     class Resources # :nodoc:
+      include FinAppsCore::Utils::Validatable
       include FinAppsCore::Utils::ParameterFilter
       require 'erb'
 
@@ -10,7 +11,7 @@ module FinAppsCore
       # @param [FinAppsCore::REST::Client] client
       # @return [FinAppsCore::REST::Resources]
       def initialize(client)
-        raise MissingArgumentsError.new 'Missing argument: client.' if client.nil?
+        not_blank(client, :client)
         @client = client
       end
 
@@ -36,7 +37,7 @@ module FinAppsCore
       end
 
       def request_without_body(path, method, id)
-        raise MissingArgumentsError.new 'Missing argument: id.' if id.nil? && path.nil?
+        not_blank(id, :id) if path.nil?
         path = "#{end_point}/:id".sub ':id', ERB::Util.url_encode(id) if path.nil?
         request_with_body path, method, {}
       end
