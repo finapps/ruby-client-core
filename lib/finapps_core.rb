@@ -11,6 +11,7 @@ require 'core_extensions/object/is_integer'
 require 'core_extensions/string/json_to_hash'
 
 require 'finapps_core/utils/loggeable'
+require 'finapps_core/utils/validatable'
 require 'finapps_core/utils/parameter_filter'
 require 'finapps_core/error'
 
