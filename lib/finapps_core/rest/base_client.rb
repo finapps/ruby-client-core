@@ -2,13 +2,16 @@
 require_relative './configuration.rb'
 require_relative './connection.rb'
 require_relative '../utils/loggeable'
+require_relative '../utils/validatable'
 
 module FinAppsCore
   module REST
     # base client functionality
     class BaseClient
       include ::FinAppsCore::Utils::Loggeable
+      include ::FinAppsCore::Utils::Validatable
       include ::FinAppsCore::REST::Connection
+
       using ObjectExtensions
       using StringExtensions
 
@@ -35,8 +38,8 @@ module FinAppsCore
       # @param [Hash] params
       # @return [Hash,Array<String>]
       def send_request(path, method, params={})
-        raise FinAppsCore::MissingArgumentsError.new 'Missing argument: path.' if path.blank?
-        raise FinAppsCore::MissingArgumentsError.new 'Missing argument: method.' if method.blank?
+        not_blank(path, :path)
+        not_blank(method, :method)
 
         response, error_messages = execute_request(path, method, params)
         result = if empty?(response)
