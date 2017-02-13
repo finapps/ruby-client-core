@@ -1,4 +1,8 @@
 # frozen_string_literal: true
+require_relative '../utils/loggeable'
+require_relative '../utils/validatable'
+require_relative '../utils/parameter_filter'
+
 module FinAppsCore
   module REST
     class Resources # :nodoc:
