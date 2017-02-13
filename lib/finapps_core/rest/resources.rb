@@ -6,13 +6,14 @@ module FinAppsCore
       include FinAppsCore::Utils::ParameterFilter
       require 'erb'
 
-      attr_reader :client
+      attr_reader :client, :logger
 
       # @param [FinAppsCore::REST::Client] client
       # @return [FinAppsCore::REST::Resources]
       def initialize(client)
         not_blank(client, :client)
         @client = client
+        @logger = client.logger
       end
 
       def list(path=nil)
@@ -36,6 +37,14 @@ module FinAppsCore
         request_without_body(path, :delete, id)
       end
 
+      protected
+
+      def end_point
+        self.class.name.split('::').last.downcase
+      end
+
+      private
+
       def request_without_body(path, method, id)
         not_blank(id, :id) if path.nil?
         path = "#{end_point}/:id".sub ':id', ERB::Util.url_encode(id) if path.nil?
@@ -47,16 +56,6 @@ module FinAppsCore
         logger.debug "#{self.class.name}##{__method__} => path: #{path} params: #{skip_sensitive_data(params)}"
 
         client.send_request path, method, params
-      end
-
-      protected
-
-      def logger
-        client.logger
-      end
-
-      def end_point
-        self.class.name.split('::').last.downcase
       end
     end
   end
