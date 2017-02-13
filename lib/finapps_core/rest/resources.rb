@@ -2,18 +2,19 @@
 module FinAppsCore
   module REST
     class Resources # :nodoc:
+      include FinAppsCore::Utils::Loggeable
       include FinAppsCore::Utils::Validatable
       include FinAppsCore::Utils::ParameterFilter
       require 'erb'
 
-      attr_reader :client, :logger
+      attr_reader :client
 
       # @param [FinAppsCore::REST::Client] client
       # @return [FinAppsCore::REST::Resources]
       def initialize(client)
         not_blank(client, :client)
         @client = client
-        @logger = client.logger
+        @logger = client.logger if client.respond_to?(:logger)
       end
 
       def list(path=nil)
