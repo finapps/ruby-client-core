@@ -4,7 +4,7 @@ module FinAppsCore
     # Adds a custom header for tenant level authorization.
     # If the value for this header already exists, it is not overriden.
     class TenantAuthentication < Faraday::Middleware
-      KEY = 'X-FinApps-Token' unless defined? KEY
+      KEY = 'X-Tenant-Token' unless defined? KEY
 
       def initialize(app, token)
         super(app)
