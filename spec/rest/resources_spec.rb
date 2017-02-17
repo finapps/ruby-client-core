@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 RSpec.describe FinAppsCore::REST::Resources do
-  describe 'timeout' do
-    subject { FinAppsCore::REST::Resources.new(FinAppsCore::REST::BaseClient.new({})).show(:timeout) }
-    it { expect { subject }.to raise_error(FinAppsCore::ApiSessionTimeoutError) }
+  describe '#new' do
+  end
+  describe '#list' do
+  end
+  describe '#create' do
+  end
+  describe '#update' do
+  end
+  describe '#show' do
+  end
+  describe '#destroy' do
   end
 end
