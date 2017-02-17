@@ -9,7 +9,7 @@ module FinAppsCore
       def initialize(app, token)
         super(app)
         sanitized = token.to_s.strip.delete("\n")
-        @header_value = "Basic #{sanitized}"
+        @header_value = "Bearer #{sanitized}"
       end
 
       def call(env)

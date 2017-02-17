@@ -13,7 +13,7 @@ module FinAppsCore
         Faraday.new(options) do |conn|
           conn.request :accept_json
           conn.request :user_agent
-          conn.request :tenant_authentication, config.tenant_token
+          conn.request :tenant_authentication, config.tenant_token unless config.valid_user_credentials?
           conn.request :json
           conn.request :retry
           conn.request :multipart
