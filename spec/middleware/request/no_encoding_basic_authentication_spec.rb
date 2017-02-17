@@ -6,8 +6,8 @@ RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
     app = proc {|env| env }
 
     context 'when credentials were provided' do
-      let(:middleware) { FinAppsCore::Middleware::NoEncodingBasicAuthentication.new(app, VALID_CREDENTIALS[:token]) }
-      let(:expected_header_value) { "Basic #{VALID_CREDENTIALS[:token]}" }
+      let(:middleware) { FinAppsCore::Middleware::NoEncodingBasicAuthentication.new(app, :token) }
+      let(:expected_header_value) { "Bearer #{:token}" }
 
       context 'when header was not previously set' do
         let(:request_env) { {request_headers: {}} }
