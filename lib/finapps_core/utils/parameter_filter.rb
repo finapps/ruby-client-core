@@ -4,7 +4,7 @@ module FinAppsCore
     module ParameterFilter
       using StringExtensions
       PROTECTED_KEYS = %w(login login1 username password password1 password_confirm token
-                          x-finapps-token authorization).freeze
+                          x-tenant-token authorization routing_no account_no tpr_id).freeze
 
       def skip_sensitive_data(hash)
         if hash.is_a? String
