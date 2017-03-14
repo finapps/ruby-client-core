@@ -1,10 +1,10 @@
 # frozen_string_literal: true
+using ObjectExtensions
+using StringExtensions
+
 module FinAppsCore
   module Middleware
     class RaiseError < Faraday::Response::Middleware # :nodoc:
-      using ObjectExtensions
-      using StringExtensions
-
       SUCCESS_STATUSES = 200..299
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
