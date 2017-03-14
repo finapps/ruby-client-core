@@ -3,9 +3,6 @@ module FinAppsCore
   module REST
     # represents both tenant and user credentials
     class Credentials
-      using ObjectExtensions
-      using StringExtensions
-
       attr_reader :identifier, :token
 
       def initialize(identifier, token)
@@ -14,7 +11,7 @@ module FinAppsCore
       end
 
       def valid?
-        identifier.present? && token.present?
+        !identifier.nil? && !token.nil?
       end
     end
   end

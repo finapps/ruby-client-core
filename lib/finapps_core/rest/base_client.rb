@@ -72,7 +72,11 @@ module FinAppsCore
       private
 
       def empty?(response)
-        response.blank? || (response.respond_to?(:body) && response.body.blank?)
+        !response || empty_body?(response)
+      end
+
+      def empty_body?(response)
+        response.respond_to?(:body) && (!response.body || (response.body.respond_to?(:empty?) && response.body.empty?))
       end
 
       def execute_request(path, method, params)
@@ -100,7 +104,7 @@ module FinAppsCore
 
       def handle_client_error(error)
         logger.warn "#{self.class}##{__method__} => #{error.class.name}, #{error}"
-        error.response.present? && error.response[:error_messages] ? error.response[:error_messages] : [error.message]
+        error.response && error.response[:error_messages] ? error.response[:error_messages] : [error.message]
       end
 
       def execute_method(path, method, params)
