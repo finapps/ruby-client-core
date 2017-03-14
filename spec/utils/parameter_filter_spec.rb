@@ -13,7 +13,11 @@ RSpec.describe FinAppsCore::Utils::ParameterFilter do
           token: '123456',
           login: 'sammysosa',
           username: 'johnny',
-          name: 'george'
+          name: 'george',
+          routing_no: '2316151651',
+          account_no: '987984654',
+          tpr_id: 'asdfasdf5465w1e65r4we654r',
+          'x-tenant-token': '498798465132154987498'
         }
       end
       let(:filtered_params) do
@@ -23,7 +27,11 @@ RSpec.describe FinAppsCore::Utils::ParameterFilter do
           token: '[REDACTED]',
           login: '[REDACTED]',
           username: '[REDACTED]',
-          name: 'george'
+          name: 'george',
+          routing_no: '[REDACTED]',
+          account_no: '[REDACTED]',
+          tpr_id: '[REDACTED]',
+          'x-tenant-token': '[REDACTED]'
         }
       end
 
