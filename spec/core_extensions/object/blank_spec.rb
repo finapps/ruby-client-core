@@ -3,7 +3,6 @@ using ObjectExtensions
 
 RSpec.describe ObjectExtensions do
   context 'when refining Object' do
-
     describe '#blank?' do
       # An object is blank if it's false, empty, or a whitespace string.
       context 'for false' do

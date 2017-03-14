@@ -5,7 +5,6 @@ using StringExtensions
 module FinAppsCore
   module Middleware
     class RaiseError < Faraday::Response::Middleware # :nodoc:
-
       SUCCESS_STATUSES = 200..299
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
