@@ -4,6 +4,9 @@ require_relative './connection.rb'
 require_relative '../utils/loggeable'
 require_relative '../utils/validatable'
 
+using ObjectExtensions
+using StringExtensions
+
 module FinAppsCore
   module REST
     # base client functionality
@@ -11,9 +14,6 @@ module FinAppsCore
       include ::FinAppsCore::Utils::Loggeable
       include ::FinAppsCore::Utils::Validatable
       include ::FinAppsCore::REST::Connection
-
-      using ObjectExtensions
-      using StringExtensions
 
       attr_reader :config
 

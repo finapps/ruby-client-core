@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+using ObjectExtensions
+
 RSpec.describe ObjectExtensions do
   context 'when refining Object' do
-    using ObjectExtensions
 
     describe '#blank?' do
       # An object is blank if it's false, empty, or a whitespace string.
