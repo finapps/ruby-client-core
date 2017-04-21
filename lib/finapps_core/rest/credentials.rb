@@ -11,7 +11,7 @@ module FinAppsCore
       end
 
       def valid?
-        !identifier.nil? && !token.nil?
+        !token.nil?
       end
     end
   end
