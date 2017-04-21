@@ -2,7 +2,7 @@
 RSpec.describe FinAppsCore::REST::Credentials do
   describe '#valid?' do
     context 'when missing identifier' do
-      it { expect(FinAppsCore::REST::Credentials.new(nil, :token).valid?).to eql(false) }
+      it { expect(FinAppsCore::REST::Credentials.new(nil, :token).valid?).to eql(true) }
     end
 
     context 'when missing token' do
