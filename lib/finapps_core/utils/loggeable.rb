@@ -6,7 +6,7 @@ module FinAppsCore
       def logger
         @logger ||= begin
           require 'logger'
-          Logger.new(STDOUT).tap {|log| log.level = Logger::FATAL }
+          Logger.new(STDOUT)
         end
       end
     end
