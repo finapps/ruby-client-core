@@ -25,14 +25,13 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency     'rash_alt',                   '~> 0.4',   '>= 0.4.3'
   spec.add_runtime_dependency     'typhoeus',                   '~> 1.3',   '>= 1.3.0'
 
-  spec.add_development_dependency 'bundler',                    '~> 1.14',  '>= 1.14.3'
+  spec.add_development_dependency 'bundler',                    '~> 1.15',  '>= 1.15.4'
+  spec.add_development_dependency 'codeclimate-test-reporter',  '~> 1.0',   '>= 1.0.8'
   spec.add_development_dependency 'gem-release',                '~> 0.7',   '>= 0.7.4'
-  spec.add_development_dependency 'rake',                       '~> 12.0',  '>= 12.0.0'
+  spec.add_development_dependency 'rake',                       '~> 12.1',  '>= 12.1.0'
   spec.add_development_dependency 'rspec',                      '~> 3.5',   '>= 3.5.0'
   spec.add_development_dependency 'webmock',                    '~> 2.3',   '>= 2.3.2'
   spec.add_development_dependency 'sinatra',                    '~> 1.4',   '>= 1.4.7'
-  spec.add_development_dependency 'simplecov',                  '~> 0.11',  '>= 0.11.2'
-  spec.add_development_dependency 'codeclimate-test-reporter',  '~> 1.0',   '>= 1.0.5'
   spec.add_development_dependency 'rubocop',                    '~> 0.49.1'
 
   spec.extra_rdoc_files = %w(README.md LICENSE)
