@@ -77,7 +77,7 @@ module FinAppsCore
       end
 
       def empty_body?(response)
-        response.respond_to?(:body) && (!response.body || (response.body.respond_to?(:empty?) && response.body.empty?))
+        !response.respond_to?(:body) || !response.body || (response.body.respond_to?(:empty?) && response.body.empty?)
       end
 
       def execute_request(path, method, params)
