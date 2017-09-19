@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FinAppsCore::Middleware::RaiseError do
   let(:fake_app) { proc {|env| env } }
   Env = Struct.new(:status, :response_headers, :body)

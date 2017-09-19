@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module Utils
     module ParameterFilter

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FinAppsCore::REST::BaseClient do
   let(:valid_tenant_options) { {tenant_token: VALID_CREDENTIALS[:token]} }
   subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options) }
@@ -88,7 +89,7 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
   describe '#respond_to_missing?' do
     context 'for supported methods' do
-      [:get, :post, :put, :delete].each do |method|
+      %i(get post put delete).each do |method|
         it("responds to #{method}") { expect(subject).to respond_to(method) }
       end
     end

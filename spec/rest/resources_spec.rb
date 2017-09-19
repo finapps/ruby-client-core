@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FinAppsCore::REST::Resources do
   describe '#new' do
   end

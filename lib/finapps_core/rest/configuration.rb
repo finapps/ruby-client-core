@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module REST
     # Represents the client configuration options
@@ -28,7 +29,7 @@ module FinAppsCore
       end
 
       def remove_empty_options(hash)
-        hash.select {|_, value| !value.nil? }
+        hash.reject {|_, value| value.nil? }
       end
     end
   end

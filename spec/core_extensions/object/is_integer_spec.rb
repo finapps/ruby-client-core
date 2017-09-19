@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe ObjectExtensions do
   context 'when refining Object' do
     using ObjectExtensions

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module Utils
     # Adds logging capabilities when included into other classes
