@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FinAppsCore::Middleware::AcceptJson do
   let(:fake_app) { proc {|env| env } }
   describe '#call' do

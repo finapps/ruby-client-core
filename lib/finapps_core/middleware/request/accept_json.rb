@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module Middleware
     # This middleware sets the Accept request-header field to specify JSON as acceptable media type for the response.

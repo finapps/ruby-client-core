@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module Middleware
     class CustomLogger < Faraday::Response::Middleware
