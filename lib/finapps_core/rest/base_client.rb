@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative './configuration.rb'
 require_relative './connection.rb'
 require_relative '../utils/loggeable'
@@ -66,7 +67,7 @@ module FinAppsCore
       end
 
       def respond_to_missing?(method_sym, include_private=false)
-        [:get, :post, :put, :delete].include?(method_sym) ? true : super
+        %i(get post put delete).include?(method_sym) ? true : super
       end
 
       private

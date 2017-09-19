@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'faraday' unless defined? Faraday
 
 module FinAppsCore

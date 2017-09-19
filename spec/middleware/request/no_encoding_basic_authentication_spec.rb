@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
   let(:key) { FinAppsCore::Middleware::NoEncodingBasicAuthentication::KEY }
 

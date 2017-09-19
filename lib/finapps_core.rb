@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'finapps_core/version' unless defined?(FinAppsCore::VERSION)
 
 require 'faraday'

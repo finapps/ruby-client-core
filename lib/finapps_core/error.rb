@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Defines some errors to identify Exceptions within this gem
 module FinAppsCore # :nodoc:
   # Base error class.

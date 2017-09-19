@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module FinAppsCore
   module Middleware
     # This middleware sets the User-Agent request-header field to identify thei client.
