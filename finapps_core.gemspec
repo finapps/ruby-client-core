@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sinatra',                    '~> 1.4',   '>= 1.4.7'
   spec.add_development_dependency 'simplecov',                  '~> 0.11',  '>= 0.11.2'
   spec.add_development_dependency 'codeclimate-test-reporter',  '~> 1.0',   '>= 1.0.5'
-  spec.add_development_dependency 'rubocop',                    '0.49'
+  spec.add_development_dependency 'rubocop',                    '~> 0.49.1'
 
   spec.extra_rdoc_files = %w(README.md LICENSE)
   spec.rdoc_options = %w(--line-numbers --inline-source --title finapps-ruby-core --main README.md)
