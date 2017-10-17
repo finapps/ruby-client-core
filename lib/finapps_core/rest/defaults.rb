@@ -8,8 +8,6 @@ module FinAppsCore
       # noinspection SpellCheckingInspection
       DEFAULTS = {
         host:             'https://api.financialapps.com',
-        user_identifier:  nil,
-        user_token:       nil,
         timeout:          30,
         proxy:            nil,
         retry_limit:      1,

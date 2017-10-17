@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'logger'
+
 module FinAppsCore
   module Middleware
     class CustomLogger < Faraday::Response::Middleware
@@ -10,14 +12,11 @@ module FinAppsCore
 
       def initialize(app, logger=nil, options={})
         super(app)
-        @logger = logger || begin
-          require 'logger'
-          ::Logger.new(STDOUT)
-        end
+        @logger = logger || new_logger
         @options = DEFAULT_OPTIONS.merge(options)
       end
 
-      def_delegators :@logger, :debug, :info, :warn, :error, :fatal
+      def_delegators :@logger, :debug
 
       def call(env)
         debug "#{self.class.name}##{__method__} => URL: #{env.method.upcase} #{env.url}"
@@ -33,7 +32,14 @@ module FinAppsCore
       private
 
       def dump(value)
-        skip_sensitive_data(value.is_a?(Array) ? value.to_h : value).to_json
+        s = skip_sensitive_data(value.is_a?(Array) ? value.to_h : value)
+        s.nil? ? 'NO-CONTENT' : s.to_json
+      end
+
+      def new_logger
+        logger = Logger.new(STDOUT)
+        logger.level = FinAppsCore::REST::Defaults::DEFAULTS[:log_level]
+        logger
       end
     end
   end

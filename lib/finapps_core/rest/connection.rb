@@ -22,7 +22,7 @@ module FinAppsCore
           conn.request :no_encoding_basic_authentication, config.user_token if config.valid_user_credentials?
 
           conn.use FinAppsCore::Middleware::RaiseError
-          conn.response :rashify
+          conn.response :rashify if config.rashify
           conn.response :json, content_type: /\bjson$/
           conn.response :custom_logger, logger, bodies: (ENV['SILENT_LOG_BODIES'] != 'true')
 

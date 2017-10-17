@@ -3,7 +3,7 @@
 module SpecHelpers
   module Client
     def client
-      FinAppsCore::REST::Client.new :tenant_id, :tenant_token
+      FinAppsCore::REST::BaseClient.new tenant_token: :tenant_token
     end
   end
 end

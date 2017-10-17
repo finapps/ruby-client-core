@@ -34,13 +34,23 @@ module FinAppsCore
       private
 
       def error_messages(body)
-        return nil if !body || (body.respond_to?(:empty?) && body.empty?)
-        body = body.json_to_hash if body.is_a?(String)
-        has_message_key?(body) ? body['messages'] : nil
+        return nil if empty?(body)
+        hash = to_hash body
+        messages hash
       end
 
-      def has_message_key?(body)
-        body.respond_to?(:key?) && body.key?('messages')
+      def messages(hash)
+        return nil unless hash.respond_to?(:key?) && hash.key?('messages')
+        hash['messages']
+      end
+
+      def to_hash(source)
+        return source unless source.is_a?(String)
+        source.json_to_hash
+      end
+
+      def empty?(o)
+        o.nil? || (o.respond_to?(:empty?) && o.empty?)
       end
     end
   end
