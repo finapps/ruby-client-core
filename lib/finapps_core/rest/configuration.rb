@@ -7,7 +7,7 @@ module FinAppsCore
       using ObjectExtensions
 
       attr_accessor :tenant_token, :user_identifier, :user_token,
-                    :host, :proxy, :timeout, :retry_limit,
+                    :host, :proxy, :timeout, :retry_limit, :rashify,
                     :log_level
 
       def initialize(options={})
