@@ -3,7 +3,7 @@
 module FinAppsCore
   module REST
     module Defaults
-      API_VERSION = '2'
+      API_VERSION = '3'
 
       # noinspection SpellCheckingInspection
       DEFAULTS = {
