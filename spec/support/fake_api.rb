@@ -5,25 +5,25 @@ require 'sinatra/base'
 # the FakeApi class is used to mock API requests while testing.
 class FakeApi < Sinatra::Base
   # timeout
-  get('/v2/resources/timeout') { status 419 }
+  get('/v3/resources/timeout') { status 419 }
 
   # resource
-  post('/v2/resources') { json_response 201, 'resource.json' }
-  get('/v2/resources/:id') { json_response 200, 'resource.json' }
-  get('/v2/resources') { json_response 200, 'resources.json' }
-  put('/v2/resources') { json_response 201, 'resource.json' }
-  delete('/v2/resources/:id') { status 202 }
+  post('/v3/resources') { json_response 201, 'resource.json' }
+  get('/v3/resources/:id') { json_response 200, 'resource.json' }
+  get('/v3/resources') { json_response 200, 'resources.json' }
+  put('/v3/resources') { json_response 201, 'resource.json' }
+  delete('/v3/resources/:id') { status 202 }
 
   # version
-  get('/v2/version') { 'Version => 2.1.29-.20161208.172810' }
+  get('/v3/version') { 'Version => 2.1.29-.20161208.172810' }
 
   # errors
-  get('/v2/client_error') { json_response 400, 'error.json' }
-  get('/v2/server_error') { status 500 }
-  get('/v2/proxy_error') { status 407 }
+  get('/v3/client_error') { json_response 400, 'error.json' }
+  get('/v3/server_error') { status 500 }
+  get('/v3/proxy_error') { status 407 }
 
   # relevance
-  get('/v2/relevance/ruleset/names') { json_response 200, 'relevance_ruleset_names.json' }
+  get('/v3/relevance/ruleset/names') { json_response 200, 'relevance_ruleset_names.json' }
 
   private
 
