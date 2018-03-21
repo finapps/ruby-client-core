@@ -2,7 +2,7 @@
 
 RSpec.describe FinAppsCore::Middleware::RequestId do
   let(:key) { FinAppsCore::Middleware::RequestId::KEY }
-  let(:id) {'request_id' }
+  let(:id) { 'request_id' }
   let(:fake_app) { proc {|env| env } }
   let(:env) { {request_headers: {}} }
 
