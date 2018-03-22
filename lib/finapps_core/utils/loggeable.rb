@@ -7,7 +7,9 @@ module FinAppsCore
       def logger
         @logger ||= begin
           require 'logger'
-          Logger.new(STDOUT)
+          logger = Logger.new(STDOUT)
+          logger.level = FinAppsCore::REST::Defaults::DEFAULTS[:log_level]
+          logger
         end
       end
     end

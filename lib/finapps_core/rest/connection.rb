@@ -20,6 +20,7 @@ module FinAppsCore
           conn.request :multipart
           conn.request :url_encoded
           conn.request :no_encoding_basic_authentication, config.user_token if config.valid_user_credentials?
+          conn.request :request_id, config.request_id if config.request_id
 
           conn.use FinAppsCore::Middleware::RaiseError
           conn.response :rashify if config.rashify
