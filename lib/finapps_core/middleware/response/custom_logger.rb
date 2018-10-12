@@ -21,12 +21,17 @@ module FinAppsCore
       def call(env)
         debug "#{self.class.name}##{__method__} => URL: #{env.method.upcase} #{env.url}"
         debug "#{self.class.name}##{__method__} => Request Headers: #{dump env.request_headers}"
+        if env[:body] && log_body?(:request)
+          debug "#{self.class.name}##{__method__} => Request Response: #{dump env[:body]}"
+        end
         super
       end
 
       def on_complete(env)
         debug "#{self.class.name}##{__method__} => Response Headers: #{dump env.response_headers}"
-        debug "#{self.class.name}##{__method__} => Response Body: #{dump env.body}" if env.body
+        if env.body && log_body?(:response)
+          debug "#{self.class.name}##{__method__} => Response Body: #{dump env.body}"
+        end
       end
 
       private
@@ -34,6 +39,15 @@ module FinAppsCore
       def dump(value)
         s = skip_sensitive_data(value.is_a?(Array) ? value.to_h : value)
         s.nil? ? 'NO-CONTENT' : s.to_json
+      end
+
+      def log_body?(type)
+        case @options[:bodies]
+        when Hash then
+          @options[:bodies][type]
+        else
+          @options[:bodies]
+        end
       end
 
       def new_logger
