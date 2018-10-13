@@ -33,7 +33,7 @@ module FinAppsCore
       end
 
       def map_and_redact(value)
-        value.map {|v| v.is_a?(Hash) ? skip_sensitive_data(v) : v}
+        value.map {|v| v.is_a?(Hash) ? skip_sensitive_data(v) : v }
       end
     end
   end
