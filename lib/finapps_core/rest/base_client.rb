@@ -57,10 +57,7 @@ module FinAppsCore
       #
       def method_missing(method_id, *arguments, &block)
         if %i[get post put delete].include? method_id
-          connection.send(method_id) do |req|
-            req.url arguments.first
-            req.body = arguments[1] unless method_id == :get
-          end
+          send_to_connection method_id, arguments
         else
           super
         end
@@ -71,6 +68,13 @@ module FinAppsCore
       end
 
       private
+
+      def send_to_connection(method_id, arguments)
+        connection.send(method_id) do |req|
+          req.url arguments.first
+          req.body = arguments[1] unless method_id == :get
+        end
+      end
 
       def empty?(response)
         !response || empty_body?(response)
