@@ -23,7 +23,7 @@ RSpec.describe FinAppsCore::Middleware::RaiseError do
     end
     context 'for connection failed error' do
       let(:env) { Env.new(419) }
-      error_message = 'Api Session Timed out'
+      error_message = 'API Session Timed out'
       it { expect { subject.on_complete(env) }.to raise_error(FinAppsCore::ApiSessionTimeoutError, error_message) }
     end
   end

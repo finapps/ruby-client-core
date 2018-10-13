@@ -10,12 +10,12 @@ module FinAppsCore
                     :host, :proxy, :timeout, :retry_limit, :rashify,
                     :log_level, :request_id
 
-      def initialize(options={})
+      def initialize(options = {})
         FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))
                                              .each {|key, value| public_send("#{key}=", value) }
 
-        raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {host: #{host}}" unless valid_host?
-        raise FinAppsCore::InvalidArgumentsError.new "Invalid argument. {timeout: #{timeout}}" unless timeout.integer?
+        raise FinAppsCore::InvalidArgumentsError, "Invalid argument. {host: #{host}}" unless valid_host?
+        raise FinAppsCore::InvalidArgumentsError, "Invalid argument. {timeout: #{timeout}}" unless timeout.integer?
       end
 
       def valid_user_credentials?

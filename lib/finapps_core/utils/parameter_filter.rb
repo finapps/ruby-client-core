@@ -3,30 +3,47 @@
 module FinAppsCore
   module Utils
     module ParameterFilter
+      include ::FinAppsCore::Utils::Loggeable
       using StringExtensions
-      PROTECTED_KEYS = %w(login login1 username password password1 password_confirm token
-                          x-tenant-token authorization routing_no account_no tpr_id).freeze
+      PROTECTED_KEYS = %w[login login1 username password password1 password_confirm token
+                          x-tenant-token authorization routing_no account_no tpr_id].freeze
 
-      def skip_sensitive_data(hash)
-        if hash.is_a? String
-          hash = hash.json_to_hash
-        end
+      def skip_sensitive_data(param)
+        hash = param_to_hash param
         if hash.is_a? Hash
-          filtered_hash = hash.clone
-          filtered_hash.each do |key, value|
-            if PROTECTED_KEYS.include? key.to_s.downcase
-              filtered_hash[key] = '[REDACTED]'
-            elsif value.is_a?(Hash)
-              filtered_hash[key] = skip_sensitive_data(value)
-            elsif value.is_a?(Array)
-              filtered_hash[key] = value.map {|v| v.is_a?(Hash) ? skip_sensitive_data(v) : v }
-            end
-          end
-
-          filtered_hash
+          clone_and_redact hash
         else
-          hash
+          replace_nil hash
         end
+      end
+
+      private
+
+      def param_to_hash(param)
+        param.is_a?(String) ? param.json_to_hash : param
+      end
+
+      def clone_and_redact(hash)
+        redact_each hash.clone
+      end
+
+      def redact_each(hash)
+        hash.each {|key, value| hash[key] = redact(key, value) }
+        hash
+      end
+
+      def redact(key, value)
+        if PROTECTED_KEYS.include? key.to_s.downcase
+          '[REDACTED]'
+        elsif value.is_a? Hash
+          redact_each value
+        else
+          replace_nil value
+        end
+      end
+
+      def replace_nil(value)
+        value || 'NO-CONTENT'
       end
     end
   end

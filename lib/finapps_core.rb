@@ -4,8 +4,6 @@ require 'finapps_core/version' unless defined?(FinAppsCore::VERSION)
 
 require 'faraday'
 require 'faraday_middleware'
-require 'typhoeus'
-require 'typhoeus/adapters/faraday'
 
 require 'core_extensions/object/is_integer'
 require 'core_extensions/string/json_to_hash'

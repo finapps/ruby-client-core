@@ -14,12 +14,13 @@ module FinAppsCore
         return if SUCCESS_STATUSES.include?(env[:status])
 
         if env[:status] == API_SESSION_TIMEOUT
-          raise(FinAppsCore::Error::ApiSessionTimeoutError, 'Api Session Timed out')
-        elsif env[:status] == CONNECTION_FAILED_STATUS
-          raise(FinAppsCore::Error::ConnectionFailedError, 'Connection Failed')
-        else
-          raise(Faraday::Error::ClientError, response_values(env))
+          raise(FinAppsCore::Error::ApiSessionTimeoutError, 'API Session Timed out')
         end
+        if env[:status] == CONNECTION_FAILED_STATUS
+          raise(FinAppsCore::Error::ConnectionFailedError, 'Connection Failed')
+        end
+
+        raise(Faraday::Error::ClientError, response_values(env))
       end
 
       def response_values(env)
@@ -35,22 +36,25 @@ module FinAppsCore
 
       def error_messages(body)
         return nil if empty?(body)
+
         hash = to_hash body
         messages hash
       end
 
       def messages(hash)
         return nil unless hash.respond_to?(:key?) && hash.key?('messages')
+
         hash['messages']
       end
 
       def to_hash(source)
         return source unless source.is_a?(String)
+
         source.json_to_hash
       end
 
-      def empty?(o)
-        o.nil? || (o.respond_to?(:empty?) && o.empty?)
+      def empty?(obj)
+        obj.nil? || (obj.respond_to?(:empty?) && obj.empty?)
       end
     end
   end
