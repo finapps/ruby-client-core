@@ -5,17 +5,16 @@ module FinAppsCore
     module Connection # :nodoc:
       # @return [Faraday::Connection]
       def faraday(config, logger)
-        options = {
-          url: "#{config.host}/v#{Defaults::API_VERSION}/",
-          request: { open_timeout: config.timeout,
-                     timeout: config.timeout }
-        }
+        options = connection_options config
 
         Faraday.new(options) do |conn|
           conn.request :accept_json
           conn.request :user_agent
-          conn.request :tenant_authentication, config.tenant_token unless config.valid_user_credentials?
-          conn.request :no_encoding_basic_authentication, config.user_token if config.valid_user_credentials?
+          if config.valid_user_credentials?
+            conn.request :no_encoding_basic_authentication, config.user_token
+          else
+            conn.request :tenant_authentication, config.tenant_token
+          end
           conn.request :json
           conn.request :retry
           conn.request :multipart
@@ -31,7 +30,16 @@ module FinAppsCore
           conn.adapter Faraday.default_adapter
         end
       end
-      module_function :faraday # becomes available as a *private instance method* to classes that mix in the module
+      module_function :faraday
+
+      def connection_options(config)
+        {
+          url: "#{config.host}/v#{Defaults::API_VERSION}/",
+          request: { open_timeout: config.timeout,
+                     timeout: config.timeout }
+        }
+      end
+      module_function :connection_options
     end
   end
 end

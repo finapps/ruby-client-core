@@ -9,16 +9,19 @@ module FinAppsCore
                           x-tenant-token authorization routing_no account_no tpr_id].freeze
 
       def skip_sensitive_data(param)
-        hash = param.is_a?(String) ? param.json_to_hash : param
-
+        hash = param_to_hash param
         if hash.is_a? Hash
           clone_and_redact hash
         else
-          hash || 'NO-CONTENT'
+          replace_nil hash
         end
       end
 
       private
+
+      def param_to_hash(param)
+        param.is_a?(String) ? param.json_to_hash : param
+      end
 
       def clone_and_redact(hash)
         cloned = hash.clone
@@ -32,8 +35,12 @@ module FinAppsCore
         elsif value.is_a? Hash
           skip_sensitive_data value
         else
-          value || 'NO-CONTENT'
+          replace_nil value
         end
+      end
+
+      def replace_nil(value)
+        value || 'NO-CONTENT'
       end
     end
   end
