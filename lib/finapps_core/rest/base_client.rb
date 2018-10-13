@@ -18,7 +18,7 @@ module FinAppsCore
 
       attr_reader :config
 
-      def initialize(options, logger=nil)
+      def initialize(options, logger = nil)
         @config = ::FinAppsCore::REST::Configuration.new options
         @logger = logger
       end
@@ -38,7 +38,7 @@ module FinAppsCore
       # @param [String] method
       # @param [Hash] params
       # @return [Hash,Array<String>]
-      def send_request(path, method, params={})
+      def send_request(path, method, params = {})
         not_blank(path, :path)
         not_blank(method, :method)
 
@@ -56,7 +56,7 @@ module FinAppsCore
       # Returns a hash obtained from parsing the JSON object in the response body.
       #
       def method_missing(method_id, *arguments, &block)
-        if %i(get post put delete).include? method_id
+        if %i[get post put delete].include? method_id
           connection.send(method_id) do |req|
             req.url arguments.first
             req.body = arguments[1] unless method_id == :get
@@ -66,8 +66,8 @@ module FinAppsCore
         end
       end
 
-      def respond_to_missing?(method_sym, include_private=false)
-        %i(get post put delete).include?(method_sym) ? true : super
+      def respond_to_missing?(method_sym, include_private = false)
+        %i[get post put delete].include?(method_sym) ? true : super
       end
 
       private
@@ -119,7 +119,7 @@ module FinAppsCore
         when :delete
           delete(path, params)
         else
-          raise FinAppsCore::UnsupportedHttpMethodError.new "Method not supported: #{method}."
+          raise FinAppsCore::UnsupportedHttpMethodError, "Method not supported: #{method}."
         end
       end
     end
