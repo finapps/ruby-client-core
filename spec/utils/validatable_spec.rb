@@ -8,13 +8,12 @@ RSpec.describe FinAppsCore::Utils::Validatable do
   describe '#not_blank' do
     context 'for null values' do
       it 'should raise FinAppsCore::MissingArgumentsError' do
-        expect { FakeClass.new.not_blank(nil) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                               'Missing argument')
+        expect { FakeClass.new.not_blank(nil) }.to raise_error(FinAppsCore::MissingArgumentsError)
       end
 
       it 'should describe the argument name when provided' do
         expect { FakeClass.new.not_blank(nil, :name) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                                      'Missing argument: name')
+                                                                      ': name')
       end
     end
 

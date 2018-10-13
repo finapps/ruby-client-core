@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe FinAppsCore::REST::BaseClient do
-  let(:valid_tenant_options) { {tenant_token: VALID_CREDENTIALS[:token]} }
+  let(:valid_tenant_options) { { tenant_token: VALID_CREDENTIALS[:token] } }
   subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options) }
 
   RESPONSE = 0
   ERROR_MESSAGES = 1
-  let(:return_array) { %i(RESPONSE ERROR_MESSAGES) }
+  let(:return_array) { %i[RESPONSE ERROR_MESSAGES] }
 
   describe '#new' do
     it 'assigns @config' do
@@ -34,17 +34,17 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
     it 'should raise FinAppsCore::MissingArgumentsError if method is NOT provided' do
       expect { subject.send_request(nil, :get) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                                'Missing argument: path')
+                                                                ': path')
     end
 
     it 'should raise FinAppsCore::MissingArgumentsError if path is NOT provided' do
       expect { subject.send_request('fake_path', nil) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                                       'Missing argument: method')
+                                                                       ': method')
     end
 
     context 'when method and path are provided' do
       subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('relevance/ruleset/names', :get) }
-      let(:return_array) { %i(RESPONSE ERROR_MESSAGES) }
+      let(:return_array) { %i[RESPONSE ERROR_MESSAGES] }
 
       it('returns an array of 2 items') do
         expect(subject).to be_a(Array)
@@ -89,7 +89,7 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
   describe '#respond_to_missing?' do
     context 'for supported methods' do
-      %i(get post put delete).each do |method|
+      %i[get post put delete].each do |method|
         it("responds to #{method}") { expect(subject).to respond_to(method) }
       end
     end

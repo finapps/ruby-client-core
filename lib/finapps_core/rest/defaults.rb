@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'logger'
+
 module FinAppsCore
   module REST
     module Defaults
@@ -10,7 +12,6 @@ module FinAppsCore
         host:             'https://api.financialapps.com',
         timeout:          30,
         proxy:            nil,
-        retry_limit:      1,
         log_level:        Logger::INFO
       }.freeze
     end

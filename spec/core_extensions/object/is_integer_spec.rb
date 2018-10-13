@@ -6,7 +6,7 @@ RSpec.describe ObjectExtensions do
 
     describe '#integer?' do
       context 'for integers' do
-        subject { 1 + rand(10) }
+        subject { rand(1..10) }
         it { expect(subject.integer?).to eq(true) }
       end
       context 'for non integers' do

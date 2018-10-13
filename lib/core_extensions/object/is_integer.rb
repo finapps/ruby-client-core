@@ -4,7 +4,7 @@ module ObjectExtensions
   refine Object do
     def integer?
       Integer(self)
-    rescue
+    rescue StandardError
       false
     end
   end

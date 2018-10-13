@@ -15,8 +15,10 @@ RSpec.describe FinAppsCore::Utils::ParameterFilter do
           login: 'sammysosa',
           username: 'johnny',
           name: 'george',
-          routing_no: '2316151651',
-          account_no: '987984654',
+          account: {
+            routing_no: '2316151651',
+            account_no: '987984654'
+          },
           tpr_id: 'asdfasdf5465w1e65r4we654r',
           'x-tenant-token': '498798465132154987498'
         }
@@ -29,8 +31,10 @@ RSpec.describe FinAppsCore::Utils::ParameterFilter do
           login: '[REDACTED]',
           username: '[REDACTED]',
           name: 'george',
-          routing_no: '[REDACTED]',
-          account_no: '[REDACTED]',
+          account: {
+            routing_no: '[REDACTED]',
+            account_no: '[REDACTED]'
+          },
           tpr_id: '[REDACTED]',
           'x-tenant-token': '[REDACTED]'
         }
