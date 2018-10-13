@@ -34,12 +34,12 @@ RSpec.describe FinAppsCore::REST::BaseClient do
 
     it 'should raise FinAppsCore::MissingArgumentsError if method is NOT provided' do
       expect { subject.send_request(nil, :get) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                                'Missing argument: path')
+                                                                ': path')
     end
 
     it 'should raise FinAppsCore::MissingArgumentsError if path is NOT provided' do
       expect { subject.send_request('fake_path', nil) }.to raise_error(FinAppsCore::MissingArgumentsError,
-                                                                       'Missing argument: method')
+                                                                       ': method')
     end
 
     context 'when method and path are provided' do

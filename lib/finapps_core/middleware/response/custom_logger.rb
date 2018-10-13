@@ -18,7 +18,12 @@ module FinAppsCore
       end
 
       def dump(value)
-        skip_sensitive_data(value) || 'NO-CONTENT'
+        s = skip_sensitive_data value
+        s.respond_to?(:to_json) ? s.to_json : s
+      end
+
+      def apply_filters(value)
+        value
       end
     end
   end

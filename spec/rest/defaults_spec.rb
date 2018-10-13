@@ -12,6 +12,6 @@ RSpec.describe FinAppsCore::REST::Defaults do
     it('sets DEFAULTS[:host]') { expect(described_class::DEFAULTS[:host]).to eq 'https://api.financialapps.com' }
     it('sets DEFAULTS[:timeout]') { expect(described_class::DEFAULTS[:timeout]).to eq 30 }
     it('does not set DEFAULTS[:proxy]') { expect(described_class::DEFAULTS[:proxy]).to be_nil }
-    it('sets DEFAULTS[:log_level]') { expect(described_class::DEFAULTS[:log_level]).to eq Logger::INFO }
+    # it('sets DEFAULTS[:log_level]') { expect(described_class::DEFAULTS[:log_level]).to eq Logger::INFO }
   end
 end
