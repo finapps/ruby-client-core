@@ -24,12 +24,16 @@ module FinAppsCore
         if PROTECTED_KEYS.include? key.to_s.downcase
           value = '[REDACTED]'
         elsif value.is_a?(Hash)
-          value = skip_sensitive_data(value)
+          value = skip_sensitive_data value
         elsif value.is_a?(Array)
-          value = value.map {|v| v.is_a?(Hash) ? skip_sensitive_data(v) : v }
+          value = map_and_redact value
         end
 
         [key, value]
+      end
+
+      def map_and_redact(value)
+        value.map {|v| v.is_a?(Hash) ? skip_sensitive_data(v) : v}
       end
     end
   end
