@@ -24,16 +24,19 @@ module FinAppsCore
       end
 
       def clone_and_redact(hash)
-        cloned = hash.clone
-        cloned.each {|key, value| cloned[key] = redact(key, value) }
-        cloned
+        redact_each hash.clone
+      end
+
+      def redact_each(hash)
+        hash.each {|key, value| hash[key] = redact(key, value) }
+        hash
       end
 
       def redact(key, value)
         if PROTECTED_KEYS.include? key.to_s.downcase
           '[REDACTED]'
         elsif value.is_a? Hash
-          skip_sensitive_data value
+          redact_each value
         else
           replace_nil value
         end
