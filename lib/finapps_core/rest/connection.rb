@@ -24,7 +24,7 @@ module FinAppsCore
           conn.use FinAppsCore::Middleware::RaiseError
           conn.response :rashify if config.rashify
           conn.response :json, content_type: /\bjson$/
-          conn.response :custom_logger, logger, bodies: true
+          conn.response :logger, logger, bodies: true
 
           # Adapter (ensure that the adapter is always last.)
           conn.adapter Faraday.default_adapter
