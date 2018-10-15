@@ -2,14 +2,12 @@
 
 require_relative '../utils/loggeable'
 require_relative '../utils/validatable'
-require_relative '../utils/parameter_filter'
 
 module FinAppsCore
   module REST
     class Resources # :nodoc:
       include FinAppsCore::Utils::Loggeable
       include FinAppsCore::Utils::Validatable
-      include FinAppsCore::Utils::ParameterFilter
       require 'erb'
 
       attr_reader :client
