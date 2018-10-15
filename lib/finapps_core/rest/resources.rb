@@ -61,7 +61,7 @@ module FinAppsCore
 
       def send_request(path, method, params = {})
         path = end_point if path.nil?
-        logger.debug "#{self.class.name}##{__method__} => path: #{path} params: #{skip_sensitive_data(params)}"
+        logger.debug "#{self.class.name}##{__method__} => path: #{path} params: #{params}"
 
         client.send_request path, method, params
       end
