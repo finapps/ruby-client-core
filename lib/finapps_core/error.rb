@@ -14,7 +14,7 @@ module FinAppsCore # :nodoc:
   # Raised whenever there is a session timeout at the API.
   class ApiSessionTimeoutError < Error; end
 
-  # Raised whenever the session does not exist at the API.
+  # Raised whenever the session is invalid or does not exist at the API.
   class ApiUnauthenticatedError < Error; end
 
   # Raised whenever the request specify an unsupported HTTP method.

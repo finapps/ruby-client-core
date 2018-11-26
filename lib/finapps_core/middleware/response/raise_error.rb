@@ -7,12 +7,16 @@ module FinAppsCore
   module Middleware
     class RaiseError < Faraday::Response::Middleware # :nodoc:
       SUCCESS_STATUSES = 200..299
+      API_UNAUTHENTICATED = 401
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
 
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
 
+        if env[:status] == API_UNAUTHENTICATED
+          raise(FinAppsCore::Error::ApiUnauthenticatedError, 'API Invalid Session')
+        end
         if env[:status] == API_SESSION_TIMEOUT
           raise(FinAppsCore::Error::ApiSessionTimeoutError, 'API Session Timed out')
         end
