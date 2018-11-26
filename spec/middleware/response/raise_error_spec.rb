@@ -18,7 +18,8 @@ RSpec.describe FinAppsCore::Middleware::RaiseError do
     end
     context 'for client errors' do
       let(:env) { Env.new(404, {}, '{"messages":["Resource Not Found"]}') }
-      it { expect { subject.on_complete(env) }.to raise_error(Faraday::Error::ClientError) }
+      error_message = 'the server responded with status 404'
+      it { expect { subject.on_complete(env) }.to raise_error(Faraday::Error::ClientError, error_message) }
     end
     context 'for connection failed error' do
       let(:env) { Env.new(407) }
