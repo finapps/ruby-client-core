@@ -15,13 +15,13 @@ module FinAppsCore
         return if SUCCESS_STATUSES.include?(env[:status])
 
         if env[:status] == API_UNAUTHENTICATED
-          raise(FinAppsCore::Error::ApiUnauthenticatedError, 'API Invalid Session')
+          raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session')
         end
         if env[:status] == API_SESSION_TIMEOUT
-          raise(FinAppsCore::Error::ApiSessionTimeoutError, 'API Session Timed out')
+          raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out')
         end
         if env[:status] == CONNECTION_FAILED_STATUS
-          raise(FinAppsCore::Error::ConnectionFailedError, 'Connection Failed')
+          raise(FinAppsCore::ConnectionFailedError, 'Connection Failed')
         end
 
         raise(Faraday::Error::ClientError, response_values(env))
