@@ -6,28 +6,26 @@ using StringExtensions
 module FinAppsCore
   module Middleware
     class RaiseError < Faraday::Response::Middleware # :nodoc:
-      SUCCESS_STATUSES = 200..299
+      SUCCESS_STATUSES = (200..299).freeze
+      API_UNAUTHENTICATED = 401
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
 
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
 
-        if env[:status] == API_SESSION_TIMEOUT
-          raise(FinAppsCore::Error::ApiSessionTimeoutError, 'API Session Timed out')
-        end
-        if env[:status] == CONNECTION_FAILED_STATUS
-          raise(FinAppsCore::Error::ConnectionFailedError, 'Connection Failed')
-        end
+        raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session') if env[:status] == API_UNAUTHENTICATED
+        raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out') if env[:status] == API_SESSION_TIMEOUT
+        raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
 
         raise(Faraday::Error::ClientError, response_values(env))
       end
 
       def response_values(env)
         {
-          status:         env.status,
-          headers:        env.response_headers,
-          body:           env.body,
+          status: env.status,
+          headers: env.response_headers,
+          body: env.body,
           error_messages: error_messages(env.body)
         }
       end
