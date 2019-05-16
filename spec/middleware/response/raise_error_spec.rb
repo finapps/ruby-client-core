@@ -31,5 +31,10 @@ RSpec.describe FinAppsCore::Middleware::RaiseError do
       error_message = 'API Session Timed out'
       it { expect { subject.on_complete(env) }.to raise_error(FinAppsCore::ApiSessionTimeoutError, error_message) }
     end
+    context 'for user lockout error' do
+      let(:env) { Env.new(403, {}, '{"messages":["User is locked"]}') }
+      error_message = 'User is Locked'
+      it { expect { subject.on_complete(env) }.to raise_error(FinAppsCore::UserLockoutError, error_message) }
+    end
   end
 end
