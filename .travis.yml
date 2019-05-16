@@ -6,7 +6,7 @@ before_install:
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
   - gem update --system
   - gem --version
-  - gem install bundler
+  - gem install bundler -v "~>1.0"
 script:
   - bundle exec rspec
 notifications:
