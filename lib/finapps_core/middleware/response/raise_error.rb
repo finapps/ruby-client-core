@@ -19,7 +19,7 @@ module FinAppsCore
         raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session') if env[:status] == API_UNAUTHENTICATED
         raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out') if env[:status] == API_SESSION_TIMEOUT
         raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
-        raise(FinAppsCore::UserLockoutError, 'User is Locked') if userIsLocked?(env)
+        raise(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
 
         raise(Faraday::Error::ClientError, response_values(env))
       end
@@ -58,7 +58,7 @@ module FinAppsCore
         obj.nil? || (obj.respond_to?(:empty?) && obj.empty?)
       end
 
-      def userIsLocked?(env)
+      def user_is_locked?(env)
         env.status == FORBIDDEN && error_messages(env.body)&.[](0)&.downcase == LOCKOUT_MESSAGE
       end
     end
