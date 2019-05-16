@@ -23,6 +23,9 @@ module FinAppsCore # :nodoc:
   # Raised whenever the connection fails.
   class ConnectionFailedError < Error; end
 
+  # Raised whenever the user is locked out from sign in.
+  class UserLockoutError < Error; end
+
   %i[InvalidArgumentsError MissingArgumentsError ApiSessionTimeoutError
      UnsupportedHttpMethodError ConnectionFailedError].each do |const|
     Error.const_set(const, FinAppsCore.const_get(const))
