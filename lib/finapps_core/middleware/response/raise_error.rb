@@ -8,8 +8,10 @@ module FinAppsCore
     class RaiseError < Faraday::Response::Middleware # :nodoc:
       SUCCESS_STATUSES = (200..299).freeze
       API_UNAUTHENTICATED = 401
+      FORBIDDEN = 403
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
+      LOCKOUT_MESSAGE = 'user is locked'
 
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
@@ -17,6 +19,7 @@ module FinAppsCore
         raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session') if env[:status] == API_UNAUTHENTICATED
         raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out') if env[:status] == API_SESSION_TIMEOUT
         raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
+        raise(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
 
         raise(Faraday::Error::ClientError, response_values(env))
       end
@@ -53,6 +56,10 @@ module FinAppsCore
 
       def empty?(obj)
         obj.nil? || (obj.respond_to?(:empty?) && obj.empty?)
+      end
+
+      def user_is_locked?(env)
+        env.status == FORBIDDEN && error_messages(env.body)&.[](0)&.downcase == LOCKOUT_MESSAGE
       end
     end
   end
