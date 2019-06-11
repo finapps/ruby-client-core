@@ -11,7 +11,7 @@ module FinAppsCore
       FORBIDDEN = 403
       CONNECTION_FAILED_STATUS = 407
       API_SESSION_TIMEOUT = 419
-      LOCKOUT_MESSAGE = 'user is locked'
+      LOCKOUT_MESSAGE = 'account is locked'
 
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
