@@ -89,14 +89,14 @@ module FinAppsCore
 
         begin
           response = execute_method path, method, params
-        rescue FinAppsCore::InvalidArgumentsError => error
-          handle_error error
-        rescue FinAppsCore::MissingArgumentsError => error
-          handle_error error
-        rescue Faraday::Error::ConnectionFailed => error
-          handle_error error
-        rescue Faraday::Error::ClientError => error
-          errors = handle_client_error(error)
+        rescue FinAppsCore::InvalidArgumentsError => e
+          handle_error e
+        rescue FinAppsCore::MissingArgumentsError => e
+          handle_error e
+        rescue Faraday::Error::ConnectionFailed => e
+          handle_error e
+        rescue Faraday::Error::ClientError => e
+          errors = handle_client_error(e)
         end
 
         [response, errors]
