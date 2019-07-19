@@ -6,10 +6,10 @@ RSpec.describe FinAppsCore::REST::Defaults do
   describe 'set constants' do
     before { stub_const(described_class.to_s, fake_class) }
 
-    it('sets API_VERSION') { expect(described_class::API_VERSION).to eq '3' }
+    it('sets API_VERSION') { expect(described_class::API_VERSION).to eq '4' }
     it('sets DEFAULTS') { expect(described_class::DEFAULTS).to be_a(Hash) }
     it('freezes DEFAULTS') { expect(described_class::DEFAULTS).to be_frozen }
-    it('sets DEFAULTS[:host]') { expect(described_class::DEFAULTS[:host]).to eq 'https://api.financialapps.com' }
+    it('sets DEFAULTS[:host]') { expect(described_class::DEFAULTS[:host]).to eq 'https://api.finclear.io' }
     it('sets DEFAULTS[:timeout]') { expect(described_class::DEFAULTS[:timeout]).to eq 30 }
     it('does not set DEFAULTS[:proxy]') { expect(described_class::DEFAULTS[:proxy]).to be_nil }
     it('sets DEFAULTS[:log_level]') { expect(described_class::DEFAULTS[:log_level]).to eq Logger::INFO }
