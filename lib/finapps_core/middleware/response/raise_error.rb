@@ -43,15 +43,15 @@ module FinAppsCore
       end
 
       def messages(hash)
-        return nil unless hash.respond_to?(:key?) && hash.key?('messages')
+        return nil unless hash.respond_to?(:key?) && hash.key?(:messages)
 
-        hash['messages']
+        hash[:messages]
       end
 
       def to_hash(source)
         return source unless source.is_a?(String)
 
-        source.json_to_hash
+        symbolize(source.json_to_hash)
       end
 
       def empty?(obj)
@@ -60,6 +60,13 @@ module FinAppsCore
 
       def user_is_locked?(env)
         env.status == FORBIDDEN && error_messages(env.body)&.[](0)&.downcase == LOCKOUT_MESSAGE
+      end
+
+      def symbolize(obj)
+        return obj.each_with_object({}) {|(k, v), memo| memo[k.to_sym] = symbolize(v);  } if obj.is_a? Hash
+        return obj.each_with_object([]) {|v, memo| memo << symbolize(v); } if obj.is_a? Array
+
+        obj
       end
     end
   end

@@ -22,7 +22,9 @@ module FinAppsCore
           conn.request :request_id, config.request_id if config.request_id
 
           conn.use FinAppsCore::Middleware::RaiseError
-          conn.response :json, content_type: /\bjson$/
+          conn.response :json,
+                        content_type: /\bjson$/,
+                        parser_options: { symbolize_names: true }
           conn.response :logger, logger, bodies: true
 
           # Adapter (ensure that the adapter is always last.)
