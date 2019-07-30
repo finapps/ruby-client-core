@@ -22,7 +22,6 @@ module FinAppsCore
           conn.request :request_id, config.request_id if config.request_id
 
           conn.use FinAppsCore::Middleware::RaiseError
-          conn.response :rashify if config.rashify
           conn.response :json, content_type: /\bjson$/
           conn.response :logger, logger, bodies: true
 
