@@ -66,7 +66,7 @@ module FinAppsCore
       private
 
       def response_body(response)
-        response.body if response.respond_to?(:body)
+        response.body if response.respond_to?(:body) && !response.body.to_s.empty?
       end
 
       def send_to_connection(method_id, arguments)
