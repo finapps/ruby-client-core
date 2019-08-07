@@ -43,11 +43,7 @@ module FinAppsCore
         not_blank(method, :method)
 
         response, error_messages = execute_request(path, method, params)
-        result = if empty?(response)
-                   nil
-                 else
-                   block_given? ? yield(response) : response.body
-                 end
+        result = block_given? ? yield(response) : response_body(response)
 
         [result, error_messages]
       end
@@ -69,6 +65,10 @@ module FinAppsCore
 
       private
 
+      def response_body(response)
+        response.body if response.respond_to?(:body)
+      end
+
       def send_to_connection(method_id, arguments)
         connection.send(method_id) do |req|
           req.url arguments.first
@@ -76,24 +76,15 @@ module FinAppsCore
         end
       end
 
-      def empty?(response)
-        !response || empty_body?(response)
-      end
-
-      def empty_body?(response)
-        !response.respond_to?(:body) || !response.body || (response.body.respond_to?(:empty?) && response.body.empty?)
-      end
-
       def execute_request(path, method, params)
+        response = nil
         errors = []
 
         begin
           response = execute_method path, method, params
-        rescue FinAppsCore::InvalidArgumentsError => e
-          handle_error e
-        rescue FinAppsCore::MissingArgumentsError => e
-          handle_error e
-        rescue Faraday::Error::ConnectionFailed => e
+        rescue FinAppsCore::InvalidArgumentsError,
+               FinAppsCore::MissingArgumentsError,
+               Faraday::Error::ConnectionFailed => e
           handle_error e
         rescue Faraday::Error::ClientError => e
           errors = handle_client_error(e)
