@@ -1,6 +1,6 @@
-pjugins:
+plugins:
   rubocop:
-    enabled: false
+    enabled: true
     channel: rubocop-0-74
   brakeman:
     enabled: false
