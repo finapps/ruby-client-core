@@ -1,6 +1,8 @@
-engines:
+version: "2"
+plugins:
   rubocop:
     enabled: true
+    channel: rubocop-0-74
   brakeman:
     enabled: false
   eslint:
@@ -12,10 +14,6 @@ engines:
     config:
       languages:
       - ruby
-ratings:
-  paths:
-  - lib/**
-  - "**.rb"
-exclude_paths:
+exclude_patterns:
 - spec/**/*
 - "**/vendor/**/*"

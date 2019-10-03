@@ -86,7 +86,7 @@ module FinAppsCore
                FinAppsCore::MissingArgumentsError,
                Faraday::Error::ConnectionFailed => e
           handle_error e
-        rescue Faraday::Error::ClientError => e
+        rescue Faraday::ClientError => e
           errors = handle_client_error(e)
         end
 
