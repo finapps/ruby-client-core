@@ -13,10 +13,6 @@ plugins:
     config:
       languages:
       - ruby
-ratings:
-  paths:
-  - lib/**
-  - "**.rb"
-exclude_paths:
+exclude_patterns:
 - spec/**/*
 - "**/vendor/**/*"
