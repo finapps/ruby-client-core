@@ -1,6 +1,6 @@
 pjugins:
   rubocop:
-    enabled: true
+    enabled: false
     channel: rubocop-0-74
   brakeman:
     enabled: false
