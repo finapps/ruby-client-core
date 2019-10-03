@@ -1,6 +1,7 @@
 engines:
   rubocop:
     enabled: true
+    channel: rubocop-0-74
   brakeman:
     enabled: false
   eslint:
