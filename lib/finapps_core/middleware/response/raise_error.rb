@@ -21,7 +21,7 @@ module FinAppsCore
         raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
         raise(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
 
-        raise(Faraday::Error::ClientError, response_values(env))
+        raise(Faraday::ClientError, response_values(env))
       end
 
       def response_values(env)
