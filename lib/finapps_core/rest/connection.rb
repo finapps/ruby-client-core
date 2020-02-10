@@ -15,6 +15,7 @@ module FinAppsCore
           else
             conn.request :tenant_authentication, config.tenant_token
           end
+          conn.request :x_consumer_id, config.consumer_id if config.consumer_id
           conn.request :json
           conn.request :retry
           conn.request :multipart
