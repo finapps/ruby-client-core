@@ -6,12 +6,12 @@ cache:
 rvm:
   - 2.5
   - 2.6
-  - ruby-head
+#  - ruby-head
 
 before_install:
   - "echo 'gem: --no-document' > ~/.gemrc"
   - gem update --system
-  - gem install bundler -v "~>2.1"
+  - gem install bundler -v "~>2.0"
 
 script:
   - bundle exec rspec
