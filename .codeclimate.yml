@@ -13,7 +13,10 @@ plugins:
     enabled: true
     config:
       languages:
-      - ruby
+        ruby:
+          mass_threshold: 30
 exclude_patterns:
 - spec/**/*
 - "**/vendor/**/*"
+- rest/connection.rb
+- core_extensions/string/json_to_hash.rb
