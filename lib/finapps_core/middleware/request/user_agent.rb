@@ -2,7 +2,7 @@
 
 module FinAppsCore
   module Middleware
-    # This middleware sets the User-Agent request-header field to identify thei client.
+    # This middleware sets the User-Agent request-header field to identify the client.
     class UserAgent < Faraday::Middleware
       KEY = 'User-Agent' unless defined? KEY
       RUBY = "#{RUBY_ENGINE}/#{RUBY_PLATFORM} #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"

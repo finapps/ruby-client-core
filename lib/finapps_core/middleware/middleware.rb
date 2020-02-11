@@ -9,6 +9,7 @@ module FinAppsCore
     autoload :NoEncodingBasicAuthentication, 'finapps_core/middleware/request/no_encoding_basic_authentication'
     autoload :TenantAuthentication, 'finapps_core/middleware/request/tenant_authentication'
     autoload :RequestId, 'finapps_core/middleware/request/request_id'
+    autoload :XConsumerId, 'finapps_core/middleware/request/x_consumer_id'
 
     if Faraday::Middleware.respond_to? :register_middleware
       Faraday::Request.register_middleware \
@@ -16,7 +17,8 @@ module FinAppsCore
         user_agent: -> { UserAgent },
         no_encoding_basic_authentication: -> { NoEncodingBasicAuthentication },
         tenant_authentication: -> { TenantAuthentication },
-        request_id: -> { RequestId }
+        request_id: -> { RequestId },
+        x_consumer_id: -> { XConsumerId }
     end
   end
 end

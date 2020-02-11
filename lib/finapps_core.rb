@@ -17,6 +17,7 @@ require 'finapps_core/middleware/request/no_encoding_basic_authentication'
 require 'finapps_core/middleware/request/accept_json'
 require 'finapps_core/middleware/request/user_agent'
 require 'finapps_core/middleware/request/request_id'
+require 'finapps_core/middleware/request/x_consumer_id'
 require 'finapps_core/middleware/response/raise_error'
 require 'finapps_core/middleware/middleware'
 
