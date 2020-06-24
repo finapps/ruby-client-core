@@ -13,11 +13,8 @@ module FinAppsCore
       def initialize(options = {})
         FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))
                                              .each {|key, value| public_send("#{key}=", value) }
-
-        fail FinAppsCore::InvalidArgumentsError, "Invalid argument. {host: #{host}}" unless valid_host?
-        unless timeout.integer?
-          fail FinAppsCore::InvalidArgumentsError, "Invalid argument. {timeout: #{timeout}}"
-        end
+        fail_invalid_host
+        fail_invalid_timeout
       end
 
       def valid_user_credentials?
@@ -25,6 +22,20 @@ module FinAppsCore
       end
 
       private
+
+      def fail_invalid_host
+        return if valid_host?
+
+        fail FinAppsCore::InvalidArgumentsError,
+             "Invalid argument. {host: #{host}}"
+      end
+
+      def fail_invalid_timeout
+        return if timeout.integer?
+
+        fail FinAppsCore::InvalidArgumentsError,
+             "Invalid argument. {timeout: #{timeout}}"
+      end
 
       def valid_host?
         host.start_with?('http://', 'https://')

@@ -15,7 +15,9 @@ RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
 
         let(:request_env) { {request_headers: {}} }
 
-        it('generates a header') { expect(result[:request_headers][key]).to eq(expected_header_value) }
+        it('generates a header') {
+          expect(result[:request_headers][key]).to eq(expected_header_value)
+        }
       end
 
       context 'when header was previously set' do
@@ -23,8 +25,13 @@ RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
 
         let(:request_env) { {request_headers: {key => 'foo'}} }
 
-        it('does not override existing header') { expect(result[:request_headers][key]).to eq('foo') }
-        it('does not generate a header') { expect(result[:request_headers][key]).not_to eq(expected_header_value) }
+        it('does not override existing header') {
+          expect(result[:request_headers][key]).to eq('foo')
+        }
+
+        it('does not generate a header') {
+          expect(result[:request_headers][key]).not_to eq(expected_header_value)
+        }
       end
     end
   end
