@@ -48,6 +48,7 @@ Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
   Exclude:
     - config/environments/**/**
+    - '*.gemspec'
     - Guardfile
     - config/routes.rb
     - config/Guardfile
