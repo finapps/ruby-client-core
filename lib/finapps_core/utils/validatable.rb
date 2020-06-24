@@ -8,7 +8,7 @@ module FinAppsCore
     # Adds validation capabilities when included into other classes
     module Validatable
       def not_blank(value, name = nil)
-        raise FinAppsCore::MissingArgumentsError, name.nil? ? nil : ": #{name}" if nil_or_empty?(value)
+        fail FinAppsCore::MissingArgumentsError, name.nil? ? nil : ": #{name}" if nil_or_empty?(value)
       end
 
       def nil_or_empty?(value)

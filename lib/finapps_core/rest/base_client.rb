@@ -95,7 +95,7 @@ module FinAppsCore
 
       def handle_error(error)
         logger.fatal "#{self.class}##{__method__} => #{error}"
-        raise error
+        fail error
       end
 
       def handle_client_error(error)
@@ -114,7 +114,7 @@ module FinAppsCore
         when :delete
           delete(path, params)
         else
-          raise FinAppsCore::UnsupportedHttpMethodError, "Method not supported: #{method}."
+          fail FinAppsCore::UnsupportedHttpMethodError, "Method not supported: #{method}."
         end
       end
     end

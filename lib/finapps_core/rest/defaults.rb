@@ -12,7 +12,7 @@ module FinAppsCore
         host: 'https://api.finclear.io',
         timeout: 30,
         proxy: nil,
-        log_level: Logger::INFO
+        log_level: Logger::UNKNOWN
       }.freeze
     end
   end

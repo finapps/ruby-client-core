@@ -29,12 +29,12 @@ RSpec.configure do |config|
   config.warnings = true
   Kernel.srand config.seed
 
-  config.before(:each) do
+  config.before do
     base_url = "#{FinAppsCore::REST::Defaults::DEFAULTS[:host]}/v#{FinAppsCore::REST::Defaults::API_VERSION}/"
     stub_request(:any, /#{base_url}/).to_rack(::FakeApi)
   end
   WebMock.disable_net_connect!(allow: 'codeclimate.com')
 end
 
-VALID_CREDENTIALS = { identifier: '49fb918d-7e71-44dd-7378-58f19606df2a',
-                      token: 'hohoho=' }.freeze
+VALID_CREDENTIALS = {identifier: '49fb918d-7e71-44dd-7378-58f19606df2a',
+                     token: 'hohoho='}.freeze

@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe FinAppsCore::REST::BaseClient do
-  let(:valid_tenant_options) { { tenant_token: VALID_CREDENTIALS[:token] } }
-  subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options) }
+  subject { described_class.new(valid_tenant_options) }
+
+  let(:valid_tenant_options) { {tenant_token: VALID_CREDENTIALS[:token]} }
+  let(:return_array) { %i[RESPONSE ERROR_MESSAGES] }
 
   RESPONSE = 0
   ERROR_MESSAGES = 1
-  let(:return_array) { %i[RESPONSE ERROR_MESSAGES] }
 
   describe '#new' do
     it 'assigns @config' do
@@ -27,23 +28,24 @@ RSpec.describe FinAppsCore::REST::BaseClient do
   end
 
   describe '#send_request' do
-    it 'should raise FinAppsCore::InvalidArgumentsError if method is NOT supported' do
+    it 'raises FinAppsCore::InvalidArgumentsError if method is NOT supported' do
       expect { subject.send_request('fake_path', :option) }.to raise_error(FinAppsCore::UnsupportedHttpMethodError,
                                                                            'Method not supported: option.')
     end
 
-    it 'should raise FinAppsCore::MissingArgumentsError if method is NOT provided' do
+    it 'raises FinAppsCore::MissingArgumentsError if method is NOT provided' do
       expect { subject.send_request(nil, :get) }.to raise_error(FinAppsCore::MissingArgumentsError,
                                                                 ': path')
     end
 
-    it 'should raise FinAppsCore::MissingArgumentsError if path is NOT provided' do
+    it 'raises FinAppsCore::MissingArgumentsError if path is NOT provided' do
       expect { subject.send_request('fake_path', nil) }.to raise_error(FinAppsCore::MissingArgumentsError,
                                                                        ': method')
     end
 
     context 'when method and path are provided' do
-      subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('relevance/ruleset/names', :get) }
+      subject { described_class.new(valid_tenant_options).send_request('relevance/ruleset/names', :get) }
+
       let(:return_array) { %i[RESPONSE ERROR_MESSAGES] }
 
       it('returns an array of 2 items') do
@@ -52,7 +54,7 @@ RSpec.describe FinAppsCore::REST::BaseClient do
       end
 
       context 'for client errors' do
-        subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('client_error', :get) }
+        subject { described_class.new(valid_tenant_options).send_request('client_error', :get) }
 
         it('result is null') { expect(subject[RESPONSE]).to be_nil }
         it('error_messages is an array') { expect(subject[ERROR_MESSAGES]).to be_a(Array) }
@@ -60,7 +62,7 @@ RSpec.describe FinAppsCore::REST::BaseClient do
       end
 
       context 'for server errors' do
-        subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('server_error', :get) }
+        subject { described_class.new(valid_tenant_options).send_request('server_error', :get) }
 
         it('the result should be nil') { expect(subject[RESPONSE]).to be_nil }
         it { expect(subject[ERROR_MESSAGES]).not_to be_nil }
@@ -69,7 +71,8 @@ RSpec.describe FinAppsCore::REST::BaseClient do
       end
 
       context 'for proxy errors' do
-        subject { FinAppsCore::REST::BaseClient.new(valid_tenant_options).send_request('proxy_error', :get) }
+        subject { described_class.new(valid_tenant_options).send_request('proxy_error', :get) }
+
         it { expect { subject }.to raise_error(FinAppsCore::ConnectionFailedError, 'Connection Failed') }
       end
     end

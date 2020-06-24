@@ -25,7 +25,7 @@ module FinAppsCore
           conn.use FinAppsCore::Middleware::RaiseError
           conn.response :json,
                         content_type: /\bjson$/,
-                        parser_options: { symbolize_names: true }
+                        parser_options: {symbolize_names: true}
           conn.response :logger, logger, bodies: true
 
           # Adapter (ensure that the adapter is always last.)
@@ -37,8 +37,8 @@ module FinAppsCore
       def connection_options(config)
         {
           url: "#{config.host}/v#{Defaults::API_VERSION}/",
-          request: { open_timeout: config.timeout,
-                     timeout: config.timeout }
+          request: {open_timeout: config.timeout,
+                    timeout: config.timeout}
         }
       end
       module_function :connection_options

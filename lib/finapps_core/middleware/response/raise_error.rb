@@ -16,12 +16,18 @@ module FinAppsCore
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
 
-        raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session') if env[:status] == API_UNAUTHENTICATED
-        raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out') if env[:status] == API_SESSION_TIMEOUT
-        raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
-        raise(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
+        if env[:status] == API_UNAUTHENTICATED
+          fail(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session')
+        end
+        if env[:status] == API_SESSION_TIMEOUT
+          fail(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out')
+        end
+        if env[:status] == CONNECTION_FAILED_STATUS
+          fail(FinAppsCore::ConnectionFailedError, 'Connection Failed')
+        end
+        fail(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
 
-        raise(Faraday::ClientError, response_values(env))
+        fail(Faraday::ClientError, response_values(env))
       end
 
       def response_values(env)
