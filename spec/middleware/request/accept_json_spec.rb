@@ -2,12 +2,16 @@
 
 RSpec.describe FinAppsCore::Middleware::AcceptJson do
   let(:fake_app) { proc {|env| env } }
+
   describe '#call' do
-    subject { FinAppsCore::Middleware::AcceptJson.new(fake_app) }
-    env = { request_headers: {} }
+    subject(:accept_json) { described_class.new(fake_app) }
+
+    env = {request_headers: {}}
 
     it('generates a UserAgent header') do
-      expect(subject.call(env)[:request_headers][FinAppsCore::Middleware::AcceptJson::KEY]).to eq('application/json')
+      header_key = FinAppsCore::Middleware::AcceptJson::KEY
+      expect(accept_json.call(env)[:request_headers][header_key])
+        .to eq('application/json')
     end
   end
 end

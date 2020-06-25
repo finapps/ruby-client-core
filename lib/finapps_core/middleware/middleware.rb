@@ -6,8 +6,10 @@ module FinAppsCore
   module Middleware
     autoload :AcceptJson, 'finapps_core/middleware/request/accept_json'
     autoload :UserAgent, 'finapps_core/middleware/request/user_agent'
-    autoload :NoEncodingBasicAuthentication, 'finapps_core/middleware/request/no_encoding_basic_authentication'
-    autoload :TenantAuthentication, 'finapps_core/middleware/request/tenant_authentication'
+    autoload :NoEncodingBasicAuthentication,
+             'finapps_core/middleware/request/no_encoding_basic_authentication'
+    autoload :TenantAuthentication,
+             'finapps_core/middleware/request/tenant_authentication'
     autoload :RequestId, 'finapps_core/middleware/request/request_id'
     autoload :XConsumerId, 'finapps_core/middleware/request/x_consumer_id'
 

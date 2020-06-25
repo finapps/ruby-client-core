@@ -7,22 +7,31 @@ RSpec.describe FinAppsCore::Middleware::NoEncodingBasicAuthentication do
     app = proc {|env| env }
 
     context 'when credentials were provided' do
-      let(:middleware) { FinAppsCore::Middleware::NoEncodingBasicAuthentication.new(app, :token) }
+      let(:middleware) { described_class.new(app, :token) }
       let(:expected_header_value) { 'Bearer token' }
 
       context 'when header was not previously set' do
-        let(:request_env) { { request_headers: {} } }
         subject(:result) { middleware.call(request_env) }
 
-        it('generates a header') { expect(result[:request_headers][key]).to eq(expected_header_value) }
+        let(:request_env) { {request_headers: {}} }
+
+        it('generates a header') {
+          expect(result[:request_headers][key]).to eq(expected_header_value)
+        }
       end
 
       context 'when header was previously set' do
-        let(:request_env) { { request_headers: { key => 'foo' } } }
         subject(:result) { middleware.call(request_env) }
 
-        it('does not override existing header') { expect(result[:request_headers][key]).to eq('foo') }
-        it('does not generate a header') { expect(result[:request_headers][key]).to_not eq(expected_header_value) }
+        let(:request_env) { {request_headers: {key => 'foo'}} }
+
+        it('does not override existing header') {
+          expect(result[:request_headers][key]).to eq('foo')
+        }
+
+        it('does not generate a header') {
+          expect(result[:request_headers][key]).not_to eq(expected_header_value)
+        }
       end
     end
   end

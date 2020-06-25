@@ -16,12 +16,7 @@ module FinAppsCore
       def on_complete(env)
         return if SUCCESS_STATUSES.include?(env[:status])
 
-        raise(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session') if env[:status] == API_UNAUTHENTICATED
-        raise(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out') if env[:status] == API_SESSION_TIMEOUT
-        raise(FinAppsCore::ConnectionFailedError, 'Connection Failed') if env[:status] == CONNECTION_FAILED_STATUS
-        raise(FinAppsCore::UserLockoutError, 'User is Locked') if user_is_locked?(env)
-
-        raise(Faraday::ClientError, response_values(env))
+        failures env
       end
 
       def response_values(env)
@@ -34,6 +29,39 @@ module FinAppsCore
       end
 
       private
+
+      def failures(env)
+        api_authentication_fail env
+        api_session_timeout_fail env
+        locked_user_fail env
+        connection_fail env
+
+        fail(Faraday::ClientError, response_values(env))
+      end
+
+      def locked_user_fail(env)
+        return unless user_is_locked?(env)
+
+        fail(FinAppsCore::UserLockoutError, 'User is Locked')
+      end
+
+      def api_session_timeout_fail(env)
+        return unless env[:status] == API_SESSION_TIMEOUT
+
+        fail(FinAppsCore::ApiSessionTimeoutError, 'API Session Timed out')
+      end
+
+      def connection_fail(env)
+        return unless env[:status] == CONNECTION_FAILED_STATUS
+
+        fail(FinAppsCore::ConnectionFailedError, 'Connection Failed')
+      end
+
+      def api_authentication_fail(env)
+        return unless env[:status] == API_UNAUTHENTICATED
+
+        fail(FinAppsCore::ApiUnauthenticatedError, 'API Invalid Session')
+      end
 
       def error_messages(body)
         return nil if empty?(body)
@@ -59,7 +87,8 @@ module FinAppsCore
       end
 
       def user_is_locked?(env)
-        env.status == FORBIDDEN && error_messages(env.body)&.[](0)&.downcase == LOCKOUT_MESSAGE
+        env.status == FORBIDDEN &&
+          error_messages(env.body)&.[](0)&.downcase == LOCKOUT_MESSAGE
       end
 
       def symbolize(obj)
