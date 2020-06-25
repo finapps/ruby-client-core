@@ -41,13 +41,9 @@ module FinAppsCore
         send_request_for_id path, :delete, id
       end
 
-      protected
-
       def end_point
         self.class.name.split('::').last.downcase
       end
-
-      private
 
       def send_request_for_id(path, method, id)
         path = resource_path(id) if path.nil?

@@ -14,11 +14,17 @@ module FinAppsCore # :nodoc:
   # Raised whenever there is a session timeout at the API.
   class ApiSessionTimeoutError < Error; end
 
+  # Raised whenever the session is invalid or does not exist at the API.
+  class ApiUnauthenticatedError < Error; end
+
   # Raised whenever the request specify an unsupported HTTP method.
   class UnsupportedHttpMethodError < Error; end
 
   # Raised whenever the connection fails.
   class ConnectionFailedError < Error; end
+
+  # Raised whenever the user is locked out from sign in.
+  class UserLockoutError < Error; end
 
   %i[InvalidArgumentsError MissingArgumentsError ApiSessionTimeoutError
      UnsupportedHttpMethodError ConnectionFailedError].each do |const|

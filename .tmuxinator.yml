@@ -1,0 +1,20 @@
+--- 
+name: ruby-client-core
+root: ~/projects/ruby-client-core/
+windows: 
+  - 
+    editor: 
+      layout: main-vertical
+      panes: 
+        - vim: $EDITOR
+        - bash: 
+          - git pull
+          - git status
+          - bundle
+          - bundle outdated
+  - 
+    guard: 
+      layout: even-horizontal
+      panes:
+        - guard:
+          - bundle exec guard

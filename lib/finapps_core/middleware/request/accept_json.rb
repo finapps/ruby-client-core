@@ -2,7 +2,8 @@
 
 module FinAppsCore
   module Middleware
-    # This middleware sets the Accept request-header field to specify JSON as acceptable media type for the response.
+    # This middleware sets the Accept request-header field to specify JSON
+    # as acceptable media type for the response.
     class AcceptJson < Faraday::Middleware
       KEY = 'Accept' unless defined? KEY
 
