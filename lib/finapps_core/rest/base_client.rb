@@ -81,7 +81,7 @@ module FinAppsCore
         [send(method, path, params), []]
       rescue FinAppsCore::InvalidArgumentsError,
              FinAppsCore::MissingArgumentsError,
-             Faraday::Error::ConnectionFailed => e
+             Faraday::ConnectionFailed => e
         [nil, handle_error(e)]
       rescue Faraday::ClientError => e
         [nil, handle_client_error(e)]

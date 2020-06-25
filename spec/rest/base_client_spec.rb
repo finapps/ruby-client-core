@@ -29,9 +29,9 @@ RSpec.describe FinAppsCore::REST::BaseClient do
   end
 
   describe '#send_request' do
-    it 'raises FinAppsCore::InvalidArgumentsError if method is NOT supported' do
+    it 'raises NoMethodError if method is NOT supported' do
       expect { base_client.send_request('fake_path', :option) }
-        .to(raise_error NoMethodError)
+        .to(raise_error(NoMethodError, /undefined method `option/))
     end
 
     it 'raises FinAppsCore::MissingArgumentsError if method is NOT provided' do

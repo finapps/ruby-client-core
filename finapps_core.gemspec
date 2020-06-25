@@ -20,10 +20,10 @@ Gem::Specification.new do |spec|
   spec.test_files = Dir['spec/**/*.rb']
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency     'faraday',                    '~> 0.15',  '>= 0.15.3'
-  spec.add_runtime_dependency     'faraday_middleware',         '~> 0.12',  '>= 0.12.2'
+  spec.add_runtime_dependency     'faraday',                    '~> 1.0',   '>= 1.0.1'
+  spec.add_runtime_dependency     'faraday_middleware',         '~> 1.0',   '>= 1.0'
 
-  spec.add_development_dependency 'bundler',                    '~> 2.0', '>= 2.0.2'
+  spec.add_development_dependency 'bundler',                    '~> 2.0',   '>= 2.0.2'
   spec.add_development_dependency 'codeclimate-test-reporter',  '~> 1.0',   '>= 1.0.9'
   spec.add_development_dependency 'gem-release',                '~> 2.0',   '>= 2.0.3'
   spec.add_development_dependency 'rake',                       '~> 13.0',  '>= 13.0.1'
