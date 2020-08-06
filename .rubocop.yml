@@ -8,6 +8,7 @@ AllCops:
     - "vendor/**/*"
     - "bin/**/*"
   CacheRootDirectory: tmp
+  NewCops: enable
 
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
@@ -48,7 +49,6 @@ Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
   Exclude:
     - config/environments/**/**
-    - '*.gemspec'
     - Guardfile
     - config/routes.rb
     - config/Guardfile
@@ -67,6 +67,8 @@ Naming/PredicateName:
   - spec/**/*
 
 RSpec/FilePath:
+  Enabled: false
+Gemspec/RequiredRubyVersion:
   Enabled: false
     
 Style/RedundantRegexpCharacterClass:
@@ -137,18 +139,8 @@ Style/OneLineConditional:
   Description: Favor the ternary operator(?:) over if/then/else/end constructs.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#ternary-operator
   Enabled: false
-Style/ExponentialNotation:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/HashTransformKeys:
-  Enabled: true
-Style/HashTransformValues:
-  Enabled: true
-Style/RedundantFetchBlock:
-  Enabled: true
-Style/SlicingWithRange:
-  Enabled: true
+Style/OptionalBooleanParameter:
+  Enabled: false
 
 RSpec/NestedGroups:
   Max: 5

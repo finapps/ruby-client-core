@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative './configuration.rb'
-require_relative './connection.rb'
+require_relative './configuration'
+require_relative './connection'
 require_relative '../utils/loggeable'
 require_relative '../utils/validatable'
 
