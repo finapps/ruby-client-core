@@ -48,6 +48,7 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
   Exclude:
+    - finapps_core.gemspec
     - config/environments/**/**
     - Guardfile
     - config/routes.rb
