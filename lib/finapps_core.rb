@@ -18,6 +18,7 @@ require 'finapps_core/middleware/request/accept_json'
 require 'finapps_core/middleware/request/user_agent'
 require 'finapps_core/middleware/request/request_id'
 require 'finapps_core/middleware/request/x_consumer_id'
+require 'finapps_core/middleware/request/x_tenant_id'
 require 'finapps_core/middleware/response/raise_error'
 require 'finapps_core/middleware/middleware'
 

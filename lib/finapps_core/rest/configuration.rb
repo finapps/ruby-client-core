@@ -8,7 +8,7 @@ module FinAppsCore
 
       attr_accessor :tenant_token, :user_identifier, :user_token,
                     :host, :proxy, :timeout, :retry_limit, :rashify,
-                    :log_level, :request_id, :consumer_id
+                    :log_level, :request_id, :consumer_id, :tenant_id
 
       def initialize(options = {})
         FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))
@@ -42,7 +42,7 @@ module FinAppsCore
       end
 
       def remove_empty_options(hash)
-        hash.reject {|_, value| value.nil? }
+        hash.compact
       end
     end
   end
