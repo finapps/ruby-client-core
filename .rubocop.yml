@@ -46,7 +46,7 @@ Metrics/ClassLength:
     - app/controllers/orders_controller.rb
     - app/models/order.rb
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context']
+  IgnoredMethods: ['describe', 'context']
   Exclude:
     - finapps_core.gemspec
     - config/environments/**/**

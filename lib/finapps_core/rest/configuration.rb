@@ -42,7 +42,7 @@ module FinAppsCore
       end
 
       def remove_empty_options(hash)
-        hash.reject {|_, value| value.nil? }
+        hash.compact
       end
     end
   end
