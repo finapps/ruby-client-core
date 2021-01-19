@@ -11,7 +11,8 @@ jobs:
       fail-fast: true
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
       - name: Install required ruby version
         uses: ruby/setup-ruby@v1
