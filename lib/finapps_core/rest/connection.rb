@@ -29,6 +29,7 @@ module FinAppsCore
         conn.request :accept_json
         conn.request :user_agent
         conn.request :x_consumer_id, config.consumer_id if config.consumer_id
+        conn.request :x_tenant_id, config.tenant_id if config.tenant_id
         conn.request :json
         conn.request :retry
         conn.request :multipart

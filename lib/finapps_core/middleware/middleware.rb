@@ -20,7 +20,8 @@ module FinAppsCore
         no_encoding_basic_authentication: -> { NoEncodingBasicAuthentication },
         tenant_authentication: -> { TenantAuthentication },
         request_id: -> { RequestId },
-        x_consumer_id: -> { XConsumerId }
+        x_consumer_id: -> { XConsumerId },
+        x_tenant_id: -> { XTenantId }
     end
   end
 end
