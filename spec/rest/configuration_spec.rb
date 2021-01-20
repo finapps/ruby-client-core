@@ -6,6 +6,7 @@ RSpec.describe FinAppsCore::REST::Configuration do
   describe '#new' do
     expected_error = FinAppsCore::InvalidArgumentsError
     default_host = FinAppsCore::REST::Defaults::DEFAULTS[:host]
+    default_timeout = FinAppsCore::REST::Defaults::DEFAULTS[:timeout]
 
     context 'with invalid timeout configuration' do
       subject(:configuration) { described_class.new(timeout: 'foo') }
@@ -17,7 +18,6 @@ RSpec.describe FinAppsCore::REST::Configuration do
     end
 
     context 'with missing timeout configuration' do
-      default_timeout = FinAppsCore::REST::Defaults::DEFAULTS[:timeout]
       subject(:configuration) { described_class.new(timeout: nil) }
 
       it 'has a default timeout value' do
