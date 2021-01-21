@@ -11,10 +11,11 @@ module FinAppsCore
                     :log_level, :request_id, :consumer_id, :tenant_id
 
       def initialize(options = {})
-        FinAppsCore::REST::Defaults::DEFAULTS.merge(remove_empty_options(options))
-                                             .each {|key, value| public_send("#{key}=", value) }
-        fail_invalid_host
+        assign_attributes FinAppsCore::REST::Defaults::DEFAULTS
+          .merge(options.compact)
         fail_invalid_timeout
+        fail_invalid_host
+        @host = @host.chomp('/')
       end
 
       def valid_user_credentials?
@@ -22,6 +23,27 @@ module FinAppsCore
       end
 
       private
+
+      def assign_attributes(new_attributes)
+        unless new_attributes.respond_to?(:each_pair)
+          fail ArgumentError, 'When assigning attributes, '\
+            "you must pass a hash argument, #{new_attributes.class} passed."
+        end
+        return if new_attributes.empty?
+
+        _assign_attributes new_attributes
+      end
+
+      def _assign_attributes(attributes)
+        attributes.each {|key, value| _assign_attribute(key, value) }
+      end
+
+      def _assign_attribute(key, value)
+        setter = :"#{key}="
+        fail UnknownAttributeError.new(self, key.to_s) unless respond_to?(setter)
+
+        public_send(setter, value)
+      end
 
       def fail_invalid_host
         return if valid_host?
@@ -39,10 +61,6 @@ module FinAppsCore
 
       def valid_host?
         host.start_with?('http://', 'https://')
-      end
-
-      def remove_empty_options(hash)
-        hash.compact
       end
     end
   end
