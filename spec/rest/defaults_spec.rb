@@ -9,9 +9,22 @@ RSpec.describe FinAppsCore::REST::Defaults do
     it('sets API_VERSION') { expect(described_class::API_VERSION).to eq '4' }
     it('sets DEFAULTS') { expect(described_class::DEFAULTS).to be_a(Hash) }
     it('freezes DEFAULTS') { expect(described_class::DEFAULTS).to be_frozen }
-    it('sets DEFAULTS[:host]') { expect(described_class::DEFAULTS[:host]).to eq 'https://api.finclear.io' }
-    it('sets DEFAULTS[:timeout]') { expect(described_class::DEFAULTS[:timeout]).to eq 30 }
-    it('does not set DEFAULTS[:proxy]') { expect(described_class::DEFAULTS[:proxy]).to be_nil }
-    it('sets DEFAULTS[:log_level]') { expect(described_class::DEFAULTS[:log_level]).to eq Logger::UNKNOWN }
+
+    it('sets DEFAULTS[:host]') {
+      expected = 'https://api.allcleardecisioning.com'
+      expect(described_class::DEFAULTS[:host]).to eq expected
+    }
+
+    it('sets DEFAULTS[:timeout]') {
+      expect(described_class::DEFAULTS[:timeout]).to eq 30
+    }
+
+    it('does not set DEFAULTS[:proxy]') {
+      expect(described_class::DEFAULTS[:proxy]).to be_nil
+    }
+
+    it('sets DEFAULTS[:log_level]') {
+      expect(described_class::DEFAULTS[:log_level]).to eq Logger::UNKNOWN
+    }
   end
 end
