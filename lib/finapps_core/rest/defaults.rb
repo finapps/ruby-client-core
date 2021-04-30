@@ -9,7 +9,7 @@ module FinAppsCore
 
       # noinspection SpellCheckingInspection
       DEFAULTS = {
-        host: 'https://api.finclear.io',
+        host: 'https://api.allcleardecisioning.com',
         timeout: 30,
         proxy: nil,
         log_level: Logger::UNKNOWN
