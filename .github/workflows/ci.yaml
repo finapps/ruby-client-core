@@ -19,11 +19,7 @@ jobs:
         # https://github.com/actions/runner/issues/849 -> use quotes for '3.0'
         ruby: [2.6, 2.7, '3.0']
     runs-on: ${{ matrix.os }}
-    env:
-      BUNDLE_JOBS: 4
-      BUNDLE_RETRY: 3
-
-    
+    steps:
       - name: Checkout source code
         uses: actions/checkout@v2
 
