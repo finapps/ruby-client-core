@@ -10,44 +10,37 @@ on:
       - ".github/**"
       - ".VERSION"
 jobs:
-  tests:
+  test:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    runs-on: ubuntu-latest
-
     strategy:
-      fail-fast: true
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        # https://github.com/actions/runner/issues/849 -> use quotes for '3.0'
+        ruby: [2.6, 2.7, '3.0']
+    runs-on: ${{ matrix.os }}
+    env:
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
 
-    steps:
+    
       - name: Checkout source code
         uses: actions/checkout@v2
 
       - name: Install required ruby version
         uses: ruby/setup-ruby@v1
-
-      - name: Setup cache key and directory for gems cache
-        uses: actions/cache@v2.1.4
         with:
-          path: vendor/bundle
-          key: ${{ runner.os  }}-gems-${{ hashFiles('**/Gemfile.lock')  }}
-          restore-keys: |
-            ${{ runner.os  }}-gems-
-
-      - name: Bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle config set jobs 4
-          bundle config set retry 3
-          bundle install
-
-      - name: Run rubocop
-        run: |
-          bundle exec rubocop --parallel
+          bundler-cache: true # runs 'bundle install' and caches gems
 
       - name: Run rspec with coverage
         run: |
           COVERAGE=true bundle exec rspec
 
+      - name: Run rubocop
+        run: |
+          bundle exec rubocop --parallel
+
       - name: Run Skunk on Project
         run: |
           gem install skunk
-          skunk lib/ -b master
+          skunk lib/ 
