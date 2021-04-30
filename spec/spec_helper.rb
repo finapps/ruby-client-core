@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 
-if ENV['CODECLIMATE_REPO_TOKEN']
-  # require 'codeclimate-test-reporter'
-  # CodeClimate::TestReporter.start
+if ENV['COVERAGE'] == 'true'
   require 'simplecov'
-  SimpleCov.start
+  require 'simplecov-console'
+
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+        SimpleCov::Formatter::HTMLFormatter,
+        SimpleCov::Formatter::Console,
+  ]
+
+  SimpleCov.start do
+    track_files 'lib/**/*.rb'
+  end
+
+  puts "Using SimpleCov v#{SimpleCov::VERSION}"
 end
 
 require 'bundler/setup'
@@ -33,7 +42,6 @@ RSpec.configure do |config|
     base_url = "#{FinAppsCore::REST::Defaults::DEFAULTS[:host]}/v#{FinAppsCore::REST::Defaults::API_VERSION}/"
     stub_request(:any, /#{base_url}/).to_rack(::FakeApi)
   end
-  WebMock.disable_net_connect!(allow: 'codeclimate.com')
 end
 
 VALID_CREDENTIALS = {identifier: '49fb918d-7e71-44dd-7378-58f19606df2a',
