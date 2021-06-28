@@ -5,7 +5,7 @@ require 'logger'
 module FinAppsCore
   module REST
     module Defaults
-      API_VERSION = '4'
+      API_VERSION = '5'
 
       # noinspection SpellCheckingInspection
       DEFAULTS = {
