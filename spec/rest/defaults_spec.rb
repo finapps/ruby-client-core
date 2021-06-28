@@ -6,7 +6,7 @@ RSpec.describe FinAppsCore::REST::Defaults do
   describe 'set constants' do
     before { stub_const(described_class.to_s, fake_class) }
 
-    it('sets API_VERSION') { expect(described_class::API_VERSION).to eq '4' }
+    it('sets API_VERSION') { expect(described_class::API_VERSION).to eq '5' }
     it('sets DEFAULTS') { expect(described_class::DEFAULTS).to be_a(Hash) }
     it('freezes DEFAULTS') { expect(described_class::DEFAULTS).to be_frozen }
 
