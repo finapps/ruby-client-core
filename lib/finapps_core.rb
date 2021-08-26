@@ -12,6 +12,8 @@ require 'finapps_core/utils/loggeable'
 require 'finapps_core/utils/validatable'
 require 'finapps_core/error'
 
+require 'finapps_core/logging/content_type_formatter'
+
 require 'finapps_core/middleware/request/tenant_authentication'
 require 'finapps_core/middleware/request/no_encoding_basic_authentication'
 require 'finapps_core/middleware/request/accept_json'
