@@ -19,7 +19,10 @@ module FinAppsCore
       end
 
       def init_connection_response(conn, logger)
-        conn.response :logger, logger, bodies: true
+        conn.response :logger, logger, bodies: true,
+                                       headers: true,
+                                       formatter: FinAppsCore::Logging::ContenTypeFormatter,
+                                       log_level: :debug
         conn.response :json,
                       content_type: /\bjson$/,
                       parser_options: {symbolize_names: true}
