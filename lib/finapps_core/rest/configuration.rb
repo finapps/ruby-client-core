@@ -27,7 +27,7 @@ module FinAppsCore
       def assign_attributes(new_attributes)
         unless new_attributes.respond_to?(:each_pair)
           fail ArgumentError, 'When assigning attributes, '\
-            "you must pass a hash argument, #{new_attributes.class} passed."
+                              "you must pass a hash argument, #{new_attributes.class} passed."
         end
         return if new_attributes.empty?
 
