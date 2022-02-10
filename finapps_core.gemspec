@@ -37,4 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.extra_rdoc_files = %w(README.md LICENSE)
   spec.rdoc_options = %w(--line-numbers --inline-source --title finapps-ruby-core --main README.md)
+  # rubocop:disable Gemspec/RequireMFA
+  spec.metadata['rubygems_mfa_required'] = 'false'
+  # rubocop:enable Gemspec/RequireMFA
 end
