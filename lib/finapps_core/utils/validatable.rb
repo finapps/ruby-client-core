@@ -12,7 +12,7 @@ module FinAppsCore
       end
 
       def nil_or_empty?(value)
-        !value || value.respond_to?(:empty?) && value.empty?
+        !value || (value.respond_to?(:empty?) && value.empty?)
       end
     end
   end
